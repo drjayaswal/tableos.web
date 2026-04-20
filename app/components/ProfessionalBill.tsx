@@ -144,7 +144,7 @@ function DividerLine() {
   return <div className="h-px bg-linear-to-r from-transparent via-zinc-200 to-transparent mx-6" />;
 }
 
-function BillSummary({ subtotal, tax, grandTotal, totalPaid, balanceDue, isFullyPaid }: any) {
+function BillSummary({ subtotal, tax, grandTotal, totalPaid }: any) {
   return (
     <section className="px-6 py-5">
       <div className="w-full mx-auto space-y-2">
@@ -212,10 +212,12 @@ export default function ProfessionalBill({ data, onClose }: any) {
     o.details.map((i: any) => ({ ...i, orderId: o.id, isPaid: o.paymentStatus === "paid" }))
   );
 
-  const subtotal   = data.orders.reduce((s: number, o: any) => s + parseFloat(o.totalAmount), 0);
-  const tax        = subtotal * TAX_RATE;
-  const grandTotal = subtotal + tax;
-  const totalPaid  = data.orders.filter((o: any) => o.paymentStatus === "paid").reduce((s: number, o: any) => s + parseFloat(o.totalAmount), 0);
+  const grandTotal = data.orders.reduce((s: number, o: any) => s + parseFloat(o.totalAmount), 0);
+  const subtotal = grandTotal / (1 + TAX_RATE);
+  const tax = grandTotal - subtotal;
+  const totalPaid = data.orders
+    .filter((o: any) => o.paymentStatus === "paid")
+    .reduce((s: number, o: any) => s + parseFloat(o.totalAmount), 0);
   const balanceDue = grandTotal - totalPaid;
   const isFullyPaid = balanceDue <= 0;
 
