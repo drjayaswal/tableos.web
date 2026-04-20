@@ -147,7 +147,7 @@ function DividerLine() {
 function BillSummary({ subtotal, tax, grandTotal, totalPaid, balanceDue, isFullyPaid }: any) {
   return (
     <section className="px-6 py-5">
-      <div className="max-w-[220px] ml-auto space-y-2">
+      <div className="w-full mx-auto space-y-2">
         <div className="flex justify-between items-center text-[12px]">
           <span className="text-zinc-400">Subtotal</span>
           <span className="text-zinc-700 tabular-nums font-medium">₹{subtotal.toFixed(2)}</span>
@@ -173,36 +173,6 @@ function BillSummary({ subtotal, tax, grandTotal, totalPaid, balanceDue, isFully
           <div className="flex justify-between items-center text-[12px]">
             <span className="text-emerald-600 font-medium">Paid</span>
             <span className="text-emerald-600 tabular-nums font-semibold">−₹{totalPaid.toFixed(2)}</span>
-          </div>
-        )}
-      </div>
-
-      <div className="mt-5">
-        {isFullyPaid ? (
-          <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-50 ring-1 ring-emerald-200/60">
-            <div className="w-8 h-8 rounded-full bg-emerald-500 grid place-items-center shrink-0">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2.5 7l3 3 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-emerald-600 font-semibold">Status</p>
-              <p className="text-[13px] font-bold text-emerald-800">Payment complete</p>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-rose-50 ring-1 ring-rose-200/60">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-rose-500 grid place-items-center shrink-0">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M7 4v4M7 9.5v.5" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-rose-500 font-semibold">Balance due</p>
-                <p className="text-[18px] font-bold text-rose-700 tabular-nums leading-tight">₹{balanceDue.toFixed(2)}</p>
-              </div>
-            </div>
           </div>
         )}
       </div>
