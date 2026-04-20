@@ -597,6 +597,8 @@ export default function ConnectPage() {
 
       if (response.status === 200) {
         toast.success("Welcome back!");
+        document.cookie = `user_role=${response.data.user.role}; path=/; Secure; SameSite=Lax; max-age=604800`;
+        document.cookie = `store_id=${response.data.storeId}; path=/; Secure; SameSite=Lax; max-age=604800`;
         document.cookie = `better-auth.session_token=${response.data.token}; path=/; Secure; SameSite=Lax; max-age=604800`;
         router.push("/dashboard");
       } else {
@@ -664,6 +666,8 @@ export default function ConnectPage() {
 
       if (response.status === 200) {
         toast.success("Verified!");
+        document.cookie = `user_role=${response.data.user.role}; path=/; Secure; SameSite=Lax; max-age=604800`;
+        document.cookie = `store_id=${response.data.storeId}; path=/; Secure; SameSite=Lax; max-age=604800`;
         document.cookie = `better-auth.session_token=${response.data.token}; path=/; Secure; SameSite=Lax; max-age=604800`;
         router.push("/dashboard");
       } else {
