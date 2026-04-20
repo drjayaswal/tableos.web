@@ -11,7 +11,7 @@ export default async function proxy(request: NextRequest) {
     
     // 1. Extract the Better Auth session token from the browser cookies
     // Default name is 'better-auth.session_token'. Update if using a custom prefix.
-    const sessionToken = request.cookies.get("better-auth.session_token");
+    const sessionToken = request.cookies.get("__Secure-better-auth.session_token");
 
     /**
      * LOGIC: REDIRECT AUTHENTICATED USERS

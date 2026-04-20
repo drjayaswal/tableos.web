@@ -658,7 +658,7 @@ export default function ConnectPage() {
     try {
       const response = await apiRequest<{ status: number; message: string; data: any }>("/auth/continue/verify/otp", {
         method: "POST",
-        body: { email: signInEmail, otp },
+        body: { email: signInEmail, otp},
       });
 
       if (response.status === 200) {
