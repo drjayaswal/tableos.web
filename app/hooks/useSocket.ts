@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 
 // Replace with your actual Hugging Face Space URL
 // Note: Use https://, socket.io-client will automatically switch to wss://
-const SOCKET_URL = process.env.NEXT_PUBLIC_API_URL || 'https://your-username-your-space.hf.space';
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 export function useSocket(storeId?: string) {
     const socketRef = useRef<Socket | null>(null);
