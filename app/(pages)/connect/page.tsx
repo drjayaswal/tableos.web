@@ -597,6 +597,7 @@ export default function ConnectPage() {
 
       if (response.status === 200) {
         toast.success("Welcome back!");
+        document.cookie = `better-auth.session_token=${response.data.token}; path=/; Secure; SameSite=Lax; max-age=604800`;
         router.push("/dashboard");
       } else {
         setGlobalError(response.message);
@@ -663,6 +664,7 @@ export default function ConnectPage() {
 
       if (response.status === 200) {
         toast.success("Verified!");
+        document.cookie = `better-auth.session_token=${response.data.token}; path=/; Secure; SameSite=Lax; max-age=604800`;
         router.push("/dashboard");
       } else {
         setOtpError(response.message);
