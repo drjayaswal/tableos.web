@@ -9,35 +9,35 @@ import { useRouter } from "next/navigation";
 const ownerSteps = [
     {
         id: 1,
-        label: "01",
+        label: "1",
         title: "Register Your Business",
         desc: "Configure your unit as a Cafe, Hotel, or Restaurant. Set local currency and geolocation for customer discovery.",
         image: "/app/tableos-1.png",
     },
     {
         id: 2,
-        label: "02",
+        label: "2",
         title: "Define Your Spaces",
         desc: "Add physical tables to your digital dashboard. Each table receives unique metadata to isolate dining sessions.",
         image: "/app/tableos-3.png",
     },
     {
         id: 3,
-        label: "03",
+        label: "3",
         title: "Build Your Menu Catalog",
         desc: "Organize offerings into filtered categories like Starters or Mains. Structure increases upsell potential significantly.",
         image: "/app/tableos-5.png",
     },
     {
         id: 4,
-        label: "04",
+        label: "4",
         title: "Set Item Attributes",
         desc: "Define Preparation Times and Dietary Labels. Accurate metadata builds customer trust and reduces staff inquiry time.",
         image: "/app/tableos-7.png",
     },
     {
         id: 5,
-        label: "05",
+        label: "5",
         title: "Go Live",
         desc: "Toggle items online or offline in real-time. The customer menu updates in milliseconds without a page refresh.",
         image: "/app/tableos-9.png",
@@ -47,35 +47,35 @@ const ownerSteps = [
 const customerSteps = [
     {
         id: 1,
-        label: "01",
+        label: "1",
         title: "Scan the Table QR",
         desc: "No app download required. Instantly initiate a session through your native mobile browser by scanning the table QR code.",
         image: "/app/tableos-12.png",
     },
     {
         id: 2,
-        label: "02",
+        label: "2",
         title: "Browse the Menu",
         desc: "Explore high-fidelity imagery with dietary filters for a fully informed ordering experience.",
         image: "/app/tableos-14.png",
     },
     {
         id: 3,
-        label: "03",
+        label: "3",
         title: "Add to Cart",
         desc: "Select items, customize preferences, and build your order at your own pace before submitting.",
         image: "/app/tableos-16.png",
     },
     {
         id: 4,
-        label: "04",
+        label: "4",
         title: "Track Your Order",
         desc: "Receive real-time push notifications as your order moves from Preparing to Ready status.",
         image: "/app/tableos-18.png",
     },
     {
         id: 5,
-        label: "05",
+        label: "5",
         title: "Frictionless Checkout",
         desc: "Track your bill in real-time and complete digital payment verification for a seamless exit.",
         image: "/app/tableos-20.png",
@@ -104,66 +104,80 @@ const TimelineSection = ({
         <section className="py-8 md:py-16">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="mb-12 md:mb-16">
-                    <p className="text-xs font-mono tracking-[0.3em] text-gray-400 uppercase mb-3">{sectionSubtitle}</p>
+                    <p className="text-xs text-gray-400/75 font-bold uppercase mb-3">{sectionSubtitle}</p>
                     <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-black">{sectionTitle}</h2>
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
                     <div className="w-full lg:w-2/5 flex flex-col gap-0">
-                        {steps.map((step, i) => (
-                            <button
-                                key={step.id}
-                                onClick={() => setActive(i)}
-                                className="text-left group relative cursor-pointer focus:outline-none"
-                            >
-                                <div className="flex gap-5 items-stretch py-4 md:py-">
-                                    <div className="flex flex-col items-center">
-                                        <motion.div
-                                            className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-mono font-bold shrink-0 border-2 transition-colors duration-300 z-10"
-                                            animate={{
-                                                backgroundColor: active === i ? "#10b922" : "white",
-                                                borderColor: active === i ? "#10b922" : "white",
-                                                color: active === i ? "white" : "black",
-                                            }}
-                                            transition={{ duration: 0.25 }}
-                                        >
-                                            {step.label}
-                                        </motion.div>
-                                        {i < steps.length - 1 && (
-                                            <div className="w-0.5 flex-1 mt-3 bg-gray-200 relative overflow-hidden">
-                                                <motion.div
-                                                    className="absolute top-0 left-0 w-full bg-gray-200"
-                                                    animate={{ height: active >= i ? "100%" : "0%" }}
-                                                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
+                        {steps.map((step, i) => {
+                            const isPast = i < active;
+                            const isCurrent = i === active;
 
-                                    <div className="pb-4 flex-1 min-w-0">
-                                        <motion.p
-                                            className="font-bold text-base md:text-lg mb-1 transition-colors duration-200"
-                                            animate={{ color: active === i ? "#000" : "#94a3b8" }}
-                                        >
-                                            {step.title}
-                                        </motion.p>
-                                        <AnimatePresence>
-                                            {active === i && (
-                                                <motion.p
-                                                    initial={{ opacity: 0, height: 0 }}
-                                                    animate={{ opacity: 1, height: "auto" }}
-                                                    exit={{ opacity: 0, height: 0 }}
-                                                    transition={{ duration: 0.3 }}
-                                                    className="text-gray-500 text-sm font-semibold leading-relaxed overflow-hidden"
-                                                >
-                                                    {step.desc}
-                                                </motion.p>
+                            const amberColor = "#f59e0b50";
+                            const greenColor = "#10b922";
+                            const blueColor = "#3b82f650";
+
+                            return (
+                                <button
+                                    key={step.id}
+                                    onClick={() => setActive(i)}
+                                    className="text-left group relative cursor-pointer focus:outline-none"
+                                >
+                                    <div className="flex gap-5 items-stretch">
+                                        <div className="flex flex-col items-center">
+                                            <motion.div
+                                                className="w-9 h-9 rounded-full flex items-center justify-center text-lg font-mono font-bold shrink-0 transition-colors duration-300 z-10"
+                                                animate={{
+                                                    backgroundColor: isCurrent ? greenColor : isPast ? amberColor : blueColor,
+                                                    color: "white",
+                                                }}
+                                                transition={{ duration: 0.25 }}
+                                            >
+                                                {step.label}
+                                            </motion.div>
+
+                                            {i < steps.length - 1 && (
+                                                <div className="w-0.5 flex-1 bg-[#E8EDF275] relative overflow-hidden">
+                                                    <motion.div
+                                                        className="absolute top-0 left-0 w-full"
+                                                        animate={{
+                                                            height: isPast || isCurrent ? "100%" : "0%",
+                                                            backgroundColor: isPast ? amberColor : greenColor
+                                                        }}
+                                                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                                                    />
+                                                </div>
                                             )}
-                                        </AnimatePresence>
+                                        </div>
+
+                                        <div className="pb-8 flex-1 min-w-0">
+                                            <motion.p
+                                                className="font-bold text-base md:text-lg mb-1 transition-colors duration-200"
+                                                animate={{
+                                                    color: isCurrent ? "#000" : "#94a3b880"
+                                                }}
+                                            >
+                                                {step.title}
+                                            </motion.p>
+                                            <AnimatePresence>
+                                                {isCurrent && (
+                                                    <motion.p
+                                                        initial={{ opacity: 0, height: 0 }}
+                                                        animate={{ opacity: 1, height: "auto" }}
+                                                        exit={{ opacity: 0, height: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        className="text-gray-500 text-sm font-semibold leading-relaxed overflow-hidden"
+                                                    >
+                                                        {step.desc}
+                                                    </motion.p>
+                                                )}
+                                            </AnimatePresence>
+                                        </div>
                                     </div>
-                                </div>
-                            </button>
-                        ))}
+                                </button>
+                            );
+                        })}
                     </div>
 
                     <div className="w-full lg:w-3/5 lg:sticky lg:top-24">
@@ -316,7 +330,7 @@ const HowToUsePage = () => {
                             ].map((item, index) => (
                                 <div key={index} className="flex flex-col md:flex-row md:items-center justify-between p-8 rounded-[2.5rem] group">
                                     <div className="flex gap-6 items-center">
-                                        <div className="text-white font-mono bg-main p-2 px-2.5 rounded-full">
+                                        <div className="text-black text-xl font-mono p-2 px-2.5 rounded-full">
                                             0{index + 1}
                                         </div>
                                         <span className="font-bold text-xl text-gray-800">{item.title}</span>

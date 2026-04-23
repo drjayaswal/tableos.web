@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CancelIcon, EmployeeIcon, HomeIcon, MenuIcon, OrderIcon, StoreIcon, TableIcon, UserIcon } from "@/app/components/icons/svg";
+import { CancelIcon, EmployeeIcon, HomeIcon, MenuIcon, OrderIcon, StoreIcon, TableIcon } from "@/app/components/icons/svg";
 
 const navItems = [
   { name: "Home", href: "/", icon: HomeIcon },
@@ -14,7 +14,6 @@ const navItems = [
   { name: "Menu", href: "/dashboard/menu", icon: MenuIcon },
   { name: "Orders", href: "/dashboard/orders", icon: OrderIcon },
   { name: "Tables", href: "/dashboard/tables", icon: TableIcon },
-  { name: "Account", href: "/dashboard/account", icon: UserIcon },
 ];
 
 function SidebarContent({ isCollapsed, isMobile = false, onClose }: { isCollapsed: boolean; isMobile?: boolean; onClose?: () => void; }) {

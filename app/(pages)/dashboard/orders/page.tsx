@@ -512,7 +512,7 @@ export default function OrdersPage() {
 
                 {loading ? (
                     <div className="flex justify-center py-24">
-                        <Loading />
+                        <Loading className="animate-spin w-4 h-4" />
                     </div>
                 ) : (
                     <div className="space-y-12">
