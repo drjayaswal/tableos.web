@@ -165,11 +165,11 @@ function SaveIcon({ size = 16, className = "", weight = "regular" }: { size?: nu
     </svg>
   );
 }
-function Loading({ size = 16, className = "", weight = "regular" }: { size?: number; className?: string; weight?: string }) {
+function Loading({ size = 16, className = "", strokeWidth = 1, weight = "regular" }: { size?: number; className?: string; strokeWidth?: number; weight?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 18 18" fill="none" className={className}>
-      <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="2" strokeOpacity="0.2" />
-      <path d="M9 2a7 7 0 0 1 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth={strokeWidth} strokeOpacity="0.2" />
+      <path d="M9 2a7 7 0 0 1 7 7" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" />
     </svg>
   )
 }

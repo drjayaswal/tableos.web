@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "../context/UserContext";
-import { GenerateIcon, InfoIcon, ScanIcon, StoreIcon } from "./icons/svg";
+import { InfoIcon, ScanIcon, StoreIcon } from "./icons/svg";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,20 +34,24 @@ export default function Navbar() {
         return null;
     }
     const navItems = [
-        {
-            name: "Scan", href: "/scan", icon:
-                <ScanIcon className="w-5 h-5" />
-        },
-        ...(role === 'owner' ? [{
-            name: "Generate", href: "/generate", icon:
-                <GenerateIcon className="w-5 h-5" />
-        }] : []),
         ...(role === 'owner' ? [{
             name: "Dashboard", href: "/dashboard", icon:
                 <StoreIcon className="w-5 h-5" />
         }] : []),
         {
+            name: "Scan", href: "/scan", icon:
+                <ScanIcon className="w-5 h-5" />
+        },
+        {
             name: "How to Use", href: "/how-to-use", icon:
+                <InfoIcon className="w-5 h-5" />
+        },
+        {
+            name: "About", href: "/about", icon:
+                <InfoIcon className="w-5 h-5" />
+        },
+        {
+            name: "Contact", href: "/contact", icon:
                 <InfoIcon className="w-5 h-5" />
         },
     ];
@@ -70,7 +74,7 @@ export default function Navbar() {
                         >
                             {isOpen ?
                                 <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 8L8 12M8 12L12 16M8 12H16M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M12 8L8 12M8 12L12 16M8 12H16M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 : <Image
                                     className="rounded-full"
@@ -177,7 +181,7 @@ const MobileShutterMenu = ({ isOpen, setIsOpen, navItems }: { isOpen: boolean, s
                         animate={{ y: 0 }}
                         exit={{ y: "-100%" }}
                         transition={{ type: "spring", stiffness: 400, damping: 40 }}
-                        className="fixed top-0 left-0 right-0 bg-white rounded-b-4xl p-6 pt-8 shadow-2xl z-101 md:hidden pointer-events-auto border-b border-gray-100"
+                        className="fixed top-0 left-0 right-0 bg-white rounded-b-3xl px-4 py-4 shadow-2xl z-101 md:hidden pointer-events-auto border-b border-gray-100"
                     >
                         <div className="flex flex-col gap-3">
                             <div className="grid gap-2">
@@ -186,10 +190,10 @@ const MobileShutterMenu = ({ isOpen, setIsOpen, navItems }: { isOpen: boolean, s
                                         key={item.name}
                                         href={item.href}
                                         onClick={() => setIsOpen(false)}
-                                        className="flex items-center gap-4 p-5 rounded-3xl bg-gray-50 active:text-white transition-all duration-200 group"
+                                        className="flex items-center gap-4 px-5 py-4 rounded-xl active:text-black active:bg-gray-100 transition-all duration-200 group"
                                     >
-                                        <span className="text-black group-active:text-white">{item.icon}</span>
-                                        <span className="font-bold text-black text-lg tracking-tight">{item.name}</span>
+                                        <span className="text-black group-active:text-black">{item.icon}</span>
+                                        <span className="font-bold text-black sm:text-lg text-sm tracking-tight group-active:text-black">{item.name}</span>
                                     </Link>
                                 ))}
                             </div>
@@ -199,7 +203,7 @@ const MobileShutterMenu = ({ isOpen, setIsOpen, navItems }: { isOpen: boolean, s
                                         style={{ opacity }}
                                         className="absolute inset-0 flex items-center justify-center pointer-events-none"
                                     >
-                                        <span className="text-white/50 font-bold text-center">
+                                        <span className="text-white font-bold text-center">
                                             Slide to Connect
                                         </span>
                                     </motion.div>
@@ -218,8 +222,10 @@ const MobileShutterMenu = ({ isOpen, setIsOpen, navItems }: { isOpen: boolean, s
                                     </motion.div>
                                 </div>
                             )}
+                            <div className="flex justify-center">
+                                <div className="w-10 h-1 rounded-full bg-gray-200" />
+                            </div>
                         </div>
-                        <div className="w-12 h-1.5 rounded-full bg-gray-200 mx-auto"></div>
                     </motion.div>
                 </>
             )}

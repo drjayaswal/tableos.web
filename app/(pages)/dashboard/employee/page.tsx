@@ -140,7 +140,7 @@ function Modal({ mode, employee, onClose, onFire, onSuccess }: ModalProps) {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: "spring", damping: 28, stiffness: 300 }}
-                className="relative w-full max-w-md mx-auto rounded-2xl bg-white shadow-2xl z-10 overflow-hidden flex flex-col max-h-[90vh]"
+                className="relative w-full max-w-md mx-auto rounded-lg bg-white shadow-2xl z-10 overflow-hidden flex flex-col max-h-[90vh]"
             >
                 <div className="flex items-center justify-between border-b border-gray-100 px-5 sm:px-6 py-4 sm:py-5 shrink-0">
                     <div>

@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CancelIcon, EmployeeIcon, HomeIcon, MenuIcon, OrderIcon, StoreIcon, TableIcon, UserIcon } from "@/app/components/icons/svg";
 
 const navItems = [
-  { name: "Home", href: "/home", icon: HomeIcon },
+  { name: "Home", href: "/", icon: HomeIcon },
   { name: "Employees", href: "/dashboard/employee", icon: EmployeeIcon },
   { name: "Store", href: "/dashboard/store", icon: StoreIcon },
   { name: "Menu", href: "/dashboard/menu", icon: MenuIcon },
@@ -34,7 +34,7 @@ function SidebarContent({ isCollapsed, isMobile = false, onClose }: { isCollapse
           </motion.div>
         )}
         {isMobile && (
-          <button onClick={onClose} className="ml-auto p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-700">
+          <button onClick={onClose} className="ml-auto cursor-pointer p-1.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-400 hover:text-gray-700">
             <CancelIcon size={18} weight="bold" />
           </button>
         )}
@@ -129,7 +129,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-
         </button>
       </motion.aside>
 
@@ -146,7 +145,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         <header className="lg:hidden flex items-center gap-3 px-4 h-14 bg-white border-b border-gray-200 shadow-sm shrink-0 z-30">
-          <button onClick={() => setIsMobileOpen(true)} className="rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors text-gray-600 border-none outline-none cursor-pointer rotate-180">
+          <button onClick={() => setIsMobileOpen(true)} className="rounded-xl transition-colors text-gray-600 border-none outline-none cursor-pointer rotate-180">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 8L8 12M8 12L12 16M8 12H16M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

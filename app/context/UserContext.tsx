@@ -50,10 +50,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-const GlobalTableOSLoader = () => (
+export const GlobalTableOSLoader = () => (
     <div className="flex h-screen w-screen flex-col items-center justify-center relative">
         <div className="relative bg-white rounded-full shadow-md shadow-black/25">
-            <div className="h-12 w-12 animate-spin rounded-full border-4 p-2 border-transparent border-t-black rounded-y-full">
+            <div className="h-12 w-12 animate-spin rounded-full border-2 p-2 border-transparent border-t-black rounded-y-full">
             </div>
             <Image 
                 src="/assets/tableOS-logo.png" 

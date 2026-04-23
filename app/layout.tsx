@@ -103,28 +103,43 @@ export default function RootLayout({
         className="min-h-screen flex flex-col text-secondary font-sans selection:bg-black selection:text-white"
       >
         <Toaster
-          position="bottom-right"
           toastOptions={{
+            classNames: {
+              icon: "hidden",
+            },
             style: {
               width: "fit-content",
-              background: "#fffff",
-              border: "4px solid #FFFFFFF",
+              background: "#ffffff",
+              border: "1px solid #e5e7eb",
               borderRadius: "10px",
               padding: "10px 16px",
               fontSize: "14px",
               fontWeight: "500",
               color: "#000000",
-              boxShadow: "0 4px 4px rgba(0, 0, 0, 0.25)",
+              boxShadow: "0 4px 4px rgba(0, 0, 0, 0.1)",
             },
             actionButtonStyle: {
+              background: "#000000",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "12px",
+              fontWeight: "bold",
+              padding: "6px 12px",
+              marginLeft: "10px"
+            },
+            cancelButtonStyle: {
               background: "#ffffff",
               color: "#000000",
               border: "1px solid #e5e7eb",
-              borderRadius: "7px",
+              borderRadius: "6px",
               fontSize: "12px",
-              marginLeft: "10px"
+              fontWeight: "bold",
+              padding: "6px 12px",
+              marginLeft: "6px"
             }
           }}
+          position="bottom-right"
         />
         <UserProvider>
           <NotificationProvider>

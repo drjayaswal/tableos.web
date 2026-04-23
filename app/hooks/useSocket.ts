@@ -1,10 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 
-// Replace with your actual Hugging Face Space URL
-// Note: Use https://, socket.io-client will automatically switch to wss://
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
+/**
+ * The backend WebSocket server URL.
+ * Set NEXT_PUBLIC_SOCKET_URL in your .env for production deployments.
+ * Falls back to localhost for local development.
+ */
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:8000';
 
+/**
+ * Custom hook that manages a persistent Socket.IO connection.
+ *
+ * - Connects immediately when `storeId` is provided.
+ * - Emits `join` to enter the store's broadcast room on connect AND reconnect.
+ * - Falls back from WebSocket to polling if the initial WS connection fails.
+ * - Auto-reconnects up to 10 times on drop (e.g. after mobile UPI redirect).
+ *
+ * @param storeId  The store room to join. Pass `undefined` to stay disconnected.
+ * @returns `{ socket, connected }` — `socket` is null until connected.
+ */
 export function useSocket(storeId?: string) {
     const socketRef = useRef<Socket | null>(null);
     const [connected, setConnected] = useState(false);
@@ -12,27 +26,23 @@ export function useSocket(storeId?: string) {
     useEffect(() => {
         if (!storeId) return;
 
-        // Hugging Face Proxy requirements:
         const socket = io(SOCKET_URL, {
-            // HF Spaces works best when it can negotiate protocols
-            transports: ['websocket'], 
-            // Crucial for cross-domain cookies/auth if using Better Auth
+            transports: ['websocket'],
             withCredentials: true,
-            // Standard reconnection settings
+            reconnection: true,
             reconnectionAttempts: 10,
-            // Ensure path is default unless you changed it in Elysia
-            path: '/socket.io/', 
+            reconnectionDelay: 1000,
+            path: '/socket.io/',
         });
 
         socket.on('connect', () => {
-            console.log('✅ Connected to HF Space Socket:', socket.id);
             setConnected(true);
+            // Re-join room on every connect/reconnect so events reach this client
             socket.emit('join', storeId);
         });
 
-        socket.on('connect_error', (err) => {
-            console.error('❌ Connection Error:', err.message);
-            // If websocket fails, try falling back to polling automatically
+        socket.on('connect_error', () => {
+            // Upgrade to polling fallback if WebSocket handshake fails (common behind proxies)
             socket.io.opts.transports = ['polling', 'websocket'];
         });
 

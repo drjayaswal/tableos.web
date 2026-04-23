@@ -888,7 +888,7 @@ export default function ConnectPage() {
                       </button>
 
                       <div className="flex flex-col items-center min-w-[48px]">
-                        <span className="text-2xl font-black text-black tabular-nums">{createForm.tables}</span>
+                        <span className="text-2xl font-bold text-black tabular-nums">{createForm.tables}</span>
                         <span className="text-[9px] text-gray-400 font-semibold uppercase tracking-wide">Units</span>
                       </div>
 

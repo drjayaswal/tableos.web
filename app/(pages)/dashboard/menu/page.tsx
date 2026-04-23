@@ -475,7 +475,7 @@ function ItemModal({
                                     placeholder="0"
                                     className={cn(inputCls, "pr-8")}
                                 />
-                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-black text-gray-300 pointer-events-none uppercase">H</span>
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-300 pointer-events-none uppercase">H</span>
                             </div>
                             <div className="relative flex-1">
                                 <input
@@ -487,7 +487,7 @@ function ItemModal({
                                     placeholder="0"
                                     className={cn(inputCls, "pr-8")}
                                 />
-                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-black text-gray-300 pointer-events-none uppercase">M</span>
+                                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-300 pointer-events-none uppercase">M</span>
                             </div>
                         </div>
                     </div>

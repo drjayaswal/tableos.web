@@ -8,7 +8,7 @@ import { useUser } from "@/app/context/UserContext";
 import { apiRequest } from "@/app/utility/api";
 import { toast } from "sonner";
 import { cn } from "@/app/lib/utils";
-import { QRCodeCanvas } from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Table {
@@ -51,13 +51,56 @@ export default function TablesPage() {
     }, [storeId]);
 
     const downloadQR = (tableLabel: string, id: string) => {
-        const canvas = document.getElementById(id) as HTMLCanvasElement;
-        if (!canvas) return;
-        const url = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.download = `${tableLabel}-QR.png`;
-        link.href = url;
-        link.click();
+        const svg = document.getElementById(id);
+        if (!svg) return;
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        const svgSize = 2000;
+        canvas.width = svgSize;
+        canvas.height = svgSize;
+
+        const svgData = new XMLSerializer().serializeToString(svg);
+        const svgBlob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(svgBlob);
+
+        const qrImg = new Image();
+        const logoImg = new Image();
+
+        logoImg.crossOrigin = "anonymous";
+        logoImg.src = "/assets/tableOS-logo.svg";
+
+        qrImg.onload = () => {
+            if (ctx) {
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(qrImg, 0, 0, svgSize, svgSize);
+
+                const logoSize = svgSize * 0.2;
+                const pos = (svgSize - logoSize) / 2;
+
+                logoImg.onload = () => {
+                    ctx.drawImage(logoImg, pos, pos, logoSize, logoSize);
+                    finishDownload();
+                };
+
+                if (logoImg.complete) {
+                    ctx.drawImage(logoImg, pos, pos, logoSize, logoSize);
+                    finishDownload();
+                }
+            }
+        };
+
+        const finishDownload = () => {
+            const pngUrl = canvas.toDataURL("image/png", 1.0);
+            const link = document.createElement("a");
+            link.download = `${tableLabel}-HDQR.png`;
+            link.href = pngUrl;
+            link.click();
+            URL.revokeObjectURL(url);
+        };
+
+        qrImg.src = url;
     };
 
     return (
@@ -65,7 +108,7 @@ export default function TablesPage() {
             <div className="mb-8">
                 <div className="flex items-center gap-3 mb-1">
                     <TableIcon className="w-6 h-6 text-black" />
-                    <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Tables & QR Codes</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Tables</h1>
                 </div>
                 <p className="text-sm text-gray-400">Monitor table occupancy and download QR codes for customer scanning</p>
             </div>
@@ -89,7 +132,7 @@ export default function TablesPage() {
                                 className={`bg-white relative rounded-xl p-4 ${table.isOccupied ? "shadow-sm border border-gray-200/80" : ""} flex flex-col items-center group transition-all`}
                             >
                                 <div className="flex items-center mb-3 justify-between w-full">
-                                    <span className="text-[10px] font-black uppercase text-gray-400">{table.tableLabel}</span>
+                                    <span className="text-[10px] font-bold uppercase text-gray-400">{table.tableLabel}</span>
                                     <div className={cn(
                                         "h-2 w-2 rounded-full",
                                         !table.isActive ? "bg-red-500 animate-pulse" : "bg-emerald-500"
@@ -118,7 +161,7 @@ export default function TablesPage() {
                                             className="absolute inset-0 rounded-none overflow-hidden bg-white"
                                             style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                                         >
-                                            <QRCodeCanvas
+                                            <QRCodeSVG
                                                 id={`qr-${table.id}`}
                                                 value={qrValue}
                                                 size={100}

@@ -88,7 +88,7 @@ export default function ScanPage() {
             <motion.div layout className="relative p-10 lg:p-14 pt-0 flex flex-col items-center text-center w-full max-w-md">
               <motion.div layout className="relative mb-8">
                 <div
-                  className="relative w-32 h-32 bg-white rounded-3xl flex items-center overflow-hidden justify-center text-white shadow-black/25 border border-gray-200 shadow-md"
+                  className="relative w-32 h-32 bg-white rounded-4xl flex items-center overflow-hidden justify-center text-white shadow-black/25 border border-gray-200 shadow-md"
                 >
                   <Image src="/assets/tableOS-text-logo.svg" alt="Logo" width={250} height={250} />
                 </div>
