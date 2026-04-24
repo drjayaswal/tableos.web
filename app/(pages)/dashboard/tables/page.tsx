@@ -135,7 +135,7 @@ export default function TablesPage() {
                                     <span className="text-[10px] font-bold uppercase text-gray-400">{table.tableLabel}</span>
                                     <div className={cn(
                                         "h-2 w-2 rounded-full",
-                                        !table.isActive ? "bg-red-500 animate-pulse" : "bg-emerald-500"
+                                        !table.isActive ? "bg-pink-500 animate-pulse" : "bg-emerald-500"
                                     )} />
                                 </div>
 

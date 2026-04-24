@@ -153,7 +153,7 @@ function Modal({ mode, employee, onClose, onFire, onSuccess }: ModalProps) {
                     </div>
                     <button
                         onClick={onClose}
-                        className="flex h-8 w-8 items-center justify-center cursor-pointer rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-500 transition-colors"
+                        className="flex h-8 w-8 items-center justify-center cursor-pointer rounded-xl text-gray-400 hover:bg-pink-500/10 hover:text-pink-500 transition-colors"
                     >
                         <CancelIcon className="w-5 h-5" />
                     </button>
@@ -196,7 +196,7 @@ function Modal({ mode, employee, onClose, onFire, onSuccess }: ModalProps) {
                 </div>
 
                 <div className="flex items-center justify-end gap-2 border-t border-gray-100 px-6 py-4">
-                    <Button variant="tableos" size="sm" onClick={onClose} className="text-gray-500 shadow-none! border-0! hover:bg-red-500/10! hover:text-red-500!">
+                    <Button variant="tableos" size="sm" onClick={onClose} className="text-gray-500 shadow-none! border-0! hover:bg-pink-500/10! hover:text-pink-500!">
                         Cancel
                     </Button>
                     <Button

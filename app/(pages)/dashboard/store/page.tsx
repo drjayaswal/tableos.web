@@ -144,7 +144,7 @@ function TimingEditor({ timing, onChange }: { timing: StoreTiming; onChange: (t:
               className={cn(
                 "shrink-0 text-[10px] font-bold px-2.5 py-1 rounded-full transition-all cursor-pointer",
                 !slot.is_open
-                  ? "bg-red-500/10 text-red-500"
+                  ? "bg-pink-500/10 text-pink-500"
                   : "bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white"
               )}
             >

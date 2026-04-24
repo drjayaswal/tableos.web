@@ -76,7 +76,7 @@ function Logo() {
   return (
     <div className="absolute bottom-4 left-4 items-center justify-center">
       <div className="bg-white rounded-3xl shadow-sm shadow-black/25 border border-gray-200 p-1">
-        <Image src="/assets/tableOS-logo.svg" alt="TableOS Logo" width={20} height={20} />
+        <Image src="/assets/tableOS-logo.svg" alt="TableOS Logo" width={20} height={20} priority />
       </div>
     </div>
   );
@@ -195,7 +195,7 @@ function Field({
         <motion.p
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-xs text-red-500 font-medium flex items-center gap-1"
+          className="text-xs text-pink-500 font-medium flex items-center gap-1"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11.9998 8.99999V13M11.9998 17H12.0098M10.6151 3.89171L2.39019 18.0983C1.93398 18.8863 1.70588 19.2803 1.73959 19.6037C1.769 19.8857 1.91677 20.142 2.14613 20.3088C2.40908 20.5 2.86435 20.5 3.77487 20.5H20.2246C21.1352 20.5 21.5904 20.5 21.8534 20.3088C22.0827 20.142 22.2305 19.8857 22.2599 19.6037C22.2936 19.2803 22.0655 18.8863 21.6093 18.0983L13.3844 3.89171C12.9299 3.10654 12.7026 2.71396 12.4061 2.58211C12.1474 2.4671 11.8521 2.4671 11.5935 2.58211C11.2969 2.71396 11.0696 3.10655 10.6151 3.89171Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -257,7 +257,7 @@ function AlertBanner({ message }: { message: string }) {
     <motion.div
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="px-4 py-3 flex text-red-700 items-center gap-2.5 bg-red-500/10 rounded-xl"
+      className="px-4 py-3 flex text-red-700 items-center gap-2.5 bg-pink-500/10 rounded-xl"
     >
       <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.9998 8.99999V13M11.9998 17H12.0098M10.6151 3.89171L2.39019 18.0983C1.93398 18.8863 1.70588 19.2803 1.73959 19.6037C1.769 19.8857 1.91677 20.142 2.14613 20.3088C2.40908 20.5 2.86435 20.5 3.77487 20.5H20.2246C21.1352 20.5 21.5904 20.5 21.8534 20.3088C22.0827 20.142 22.2305 19.8857 22.2599 19.6037C22.2936 19.2803 22.0655 18.8863 21.6093 18.0983L13.3844 3.89171C12.9299 3.10654 12.7026 2.71396 12.4061 2.58211C12.1474 2.4671 11.8521 2.4671 11.5935 2.58211C11.2969 2.71396 11.0696 3.10655 10.6151 3.89171Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -353,7 +353,7 @@ function OTPInput({ length = 6, value, onChange }: { length?: number; value: str
           onPaste={handlePaste}
           className={cn(
             "w-12 h-12 text-center text-lg font-bold border-2 rounded-[20px] outline-none transition-all duration-150 bg-white",
-            d ? "border-green-500 text-black" : "border-gray-200/50 hover:border-gray-200 focus:border-red-500 text-black",
+            d ? "border-green-500 text-black" : "border-gray-200/50 hover:border-gray-200 focus:border-pink-500 text-black",
           )}
         />
       ))}
@@ -376,7 +376,7 @@ function OTPScreen({
         <BackButton label="Back" onClick={onBack} />
 
         <div className="text-center mb-6 sm:mb-8">
-          <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center mx-auto mb-4">
+          <div className="w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center mx-auto mb-4">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 7L10.1649 12.7154C10.8261 13.1783 11.1567 13.4097 11.5163 13.4993C11.8339 13.5785 12.1661 13.5785 12.4837 13.4993C12.8433 13.4097 13.1739 13.1783 13.8351 12.7154L22 7M6.8 20H17.2C18.8802 20 19.7202 20 20.362 19.673C20.9265 19.3854 21.3854 18.9265 21.673 18.362C22 17.7202 22 16.8802 22 15.2V8.8C22 7.11984 22 6.27976 21.673 5.63803C21.3854 5.07354 20.9265 4.6146 20.362 4.32698C19.7202 4 18.8802 4 17.2 4H6.8C5.11984 4 4.27976 4 3.63803 4.32698C3.07354 4.6146 2.6146 5.07354 2.32698 5.63803C2 6.27976 2 7.11984 2 8.8V15.2C2 16.8802 2 17.7202 2.32698 18.362C2.6146 18.9265 3.07354 19.3854 3.63803 19.673C4.27976 20 5.11984 20 6.8 20Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -661,7 +661,7 @@ export default function ConnectPage() {
     try {
       const response = await apiRequest<{ status: number; message: string; data: any }>("/auth/continue/verify/otp", {
         method: "POST",
-        body: { email: signInEmail, otp},
+        body: { email: signInEmail, otp },
       });
 
       if (response.status === 200) {
@@ -1072,7 +1072,7 @@ export default function ConnectPage() {
               key="staff-otp"
               email={signInEmail} otp={otp} setOtp={setOtp} otpError={otpError}
               loading={loading} resendTimer={resendTimer} onVerify={handleStaffOTPVerify}
-              onResend={handleResend} onBack={() => { setSignInStep("email");}}
+              onResend={handleResend} onBack={() => { setSignInStep("email"); }}
               sublabel="We sent a verification code to" ctaText="Confirm & Enter"
             />
           )}

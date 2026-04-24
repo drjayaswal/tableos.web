@@ -11,7 +11,7 @@ const AboutPage = () => {
         <div className="min-h-screen bg-white font-sans text-black">
            <header className="bg-gray-50/50 shadow-inner shadow-black/30 py-30 px-6 relative overflow-hidden">
                 <div className="absolute top-20 right-20 p-20 grayscale opacity-5 pointer-events-none">
-                    <Image src="/assets/tableOS-logo.svg" className='scale-400' alt="TableOS Logo" width={150} height={150} />
+                    <Image src="/assets/tableOS-logo.svg" className='scale-400' alt="TableOS Logo" width={150} height={150} priority/>
 
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -58,6 +58,7 @@ const AboutPage = () => {
                         alt="TableOS Logo"
                         width={150}
                         height={150}
+                        priority
                     />
                     <h2 className="text-2xl md:text-4xl font-bold text-black mb-8 tracking-tighter">Ready to optimize your floor?</h2>
                     <button className="hover:border-gray-200/50 border-transparent border hover:bg-white text-black cursor-pointer transition-all duration-300 px-6 py-3 rounded-[22px] font-bold text-lg hover:shadow-md hover:shadow-black/20 inline-flex items-center gap-3">

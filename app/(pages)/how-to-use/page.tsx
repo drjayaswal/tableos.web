@@ -129,8 +129,8 @@ const TimelineSection = ({
                                             <motion.div
                                                 className="w-9 h-9 rounded-full flex items-center justify-center text-lg font-mono font-bold shrink-0 transition-colors duration-300 z-10"
                                                 animate={{
-                                                    backgroundColor: isCurrent ? greenColor : isPast ? amberColor : blueColor,
-                                                    color: "white",
+                                                    backgroundColor: isCurrent ? greenColor : "#E8EDF275",
+                                                    color: isCurrent ? "#FFFFFF" : "#00000075",
                                                 }}
                                                 transition={{ duration: 0.25 }}
                                             >
@@ -143,7 +143,7 @@ const TimelineSection = ({
                                                         className="absolute top-0 left-0 w-full"
                                                         animate={{
                                                             height: isPast || isCurrent ? "100%" : "0%",
-                                                            backgroundColor: isPast ? amberColor : greenColor
+                                                            backgroundColor: isPast ? "#E8EDF275" : greenColor
                                                         }}
                                                         transition={{ duration: 0.4, ease: "easeInOut" }}
                                                     />
@@ -195,7 +195,9 @@ const TimelineSection = ({
                                         src={steps[active].image}
                                         alt={steps[active].title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         quality={80}
+                                        priority
                                         className="object-cover"
                                     />
                                 </motion.div>
@@ -246,7 +248,7 @@ const HowToUsePage = () => {
         <div className="min-h-screen bg-white font-sans text-black">
             <header className="bg-gray-50/50 shadow-inner shadow-black/30 py-30 px-6 relative overflow-hidden">
                 <div className="absolute top-20 right-20 p-20 grayscale opacity-5 pointer-events-none">
-                    <Image src="/assets/tableOS-logo.svg" className='scale-400' alt="TableOS Logo" width={150} height={150} />
+                    <Image src="/assets/tableOS-logo.svg" className='scale-400' alt="TableOS Logo" width={150} height={150} priority />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <motion.h1
@@ -350,7 +352,7 @@ const HowToUsePage = () => {
                         className="hidden lg:block absolute scale-[3.5] top-0 left-0 opacity-5"
                         alt="TableOS Logo"
                         width={150}
-                        height={150}
+                        height={150} priority
                     />
                     <h2 className="text-2xl md:text-4xl font-bold text-black mb-8 tracking-tighter">Ready to optimize your floor?</h2>
                     <button onClick={() =>

@@ -1048,7 +1048,7 @@ function NotificationsDrawer({
 
     const statusStyle = (s: string) => {
         if (s === "pending") return "bg-amber-500";
-        if (s === "declined" || s === "cancelled") return "bg-red-500";
+        if (s === "declined" || s === "cancelled") return "bg-pink-500";
         return "bg-green-500";
     };
 
@@ -1317,7 +1317,7 @@ export default function ScanAndOrder() {
     const [sessionUnpaidBalance, setSessionUnpaidBalance] = useState(0);
     const [isPaymentMode, setIsPaymentMode] = useState(false);
 
-    
+
     const activeOrderRef = useRef<string | null>(null);
 
     const [filters, setFilters] = useState({
@@ -1338,7 +1338,7 @@ export default function ScanAndOrder() {
     const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
     const { socket, connected } = useSocket(storeId || undefined);
 
-    
+
     useEffect(() => {
         if (activeOrder?.orderId) activeOrderRef.current = activeOrder.orderId;
     }, [activeOrder?.orderId]);
@@ -1517,7 +1517,7 @@ export default function ScanAndOrder() {
             socket.off("session:payment:verified", handleSessionPaymentVerified);
             socket.off("session:payment:declined", handleSessionPaymentDeclined);
         };
-    }, [socket, isPaymentMode]); 
+    }, [socket, isPaymentMode]);
 
 
 
@@ -1989,7 +1989,7 @@ export default function ScanAndOrder() {
         (filters.minDiscount !== null && filters.minDiscount > 0) ||
         filters.sortBy !== "default";
 
-    if (status === "loading") return <GlobalTableOSLoader/>;
+    if (status === "loading") return <GlobalTableOSLoader />;
 
     if (status === "error") {
         return (
@@ -2228,7 +2228,7 @@ export default function ScanAndOrder() {
                                     src="/assets/tableOS-logo.svg"
                                     alt="TableOS"
                                     width={13}
-                                    height={13}
+                                    height={13} priority
                                 />
                                 Powered by <span className="text-black">tableOS</span>
                             </p>

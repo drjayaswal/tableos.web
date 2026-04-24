@@ -13,13 +13,11 @@ import {
   CheckCircle,
   Layout,
   ChartLineUp,
-  ArrowRight,
   Monitor,
   DeviceMobile,
 } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Loading } from "./components/icons/svg";
 
 const features = [
@@ -188,33 +186,14 @@ export default function Home() {
   const router = useRouter();
   return (
     <div className="min-h-screen bg-landing-bg" style={{ fontFamily: font }}>
-      <header className="sticky top-0 z-50 bg-white/20 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/assets/tableOS-logo.svg"
-              alt="tableOS"
-              width={22}
-              height={22}
-            />
-            <span className="text-[17px] tracking-tight">tableOS</span>
-          </div>
-        </div>
-      </header>
-
       <section className="relative overflow-hidden">
         <div className="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-12 sm:pb-20 text-center">
           <h1 className="text-[36px] sm:text-[52px] lg:text-[64px] font-semibold tracking-tighter text-black leading-[1.05] mb-4">
-            The only perfect{" "}
-            <span className="underline underline-offset-6 sm:decoration-9">
-              table
-            </span>
-            <span className="text-pink-500 underline underline-offset-4 decoration-wavy">
+            The only perfect table
+            <span className="text-pink-500">
               OS
             </span>
-            <span className="underline sm:underline-offset-9 underline-offset-7 sm:decoration-9">
-              .
-            </span>
+            .
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-[18px] sm:text-[20px] text-landing-light-muted leading-relaxed font-medium">
             Eliminate friction in your restaurant with our intelligent
@@ -256,6 +235,7 @@ export default function Home() {
                   alt="Logo"
                   width={18}
                   height={18}
+                  priority
                 />
                 tableOS
               </div>
@@ -280,6 +260,7 @@ export default function Home() {
                   alt="tableOS"
                   width={24}
                   height={24}
+                  priority
                 />
                 <span className="font-bold text-lg tracking-tight">Orders</span>
               </div>

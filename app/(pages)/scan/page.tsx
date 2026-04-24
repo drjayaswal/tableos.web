@@ -67,15 +67,15 @@ export default function ScanPage() {
               </p>
             </motion.div>
             <motion.div variants={itemVariants} className="pt-4">
-              <div className="sm:flex hidden items-center gap-4 p-4 bg-linear-to-r from-indigo-500/10 via-transparent to-transparent rounded-full max-w-sm mx-auto lg:mx-0">
-                <div className="shrink-0 text-white p-3 bg-indigo-600 rounded-4xl">
+              <div className="sm:flex hidden items-center gap-4 p-4 bg-linear-to-r from-pink-500/10 via-transparent to-transparent rounded-full max-w-sm mx-auto lg:mx-0">
+                <div className="shrink-0 text-white p-3 bg-pink-600 rounded-4xl">
                   <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 11C6.38695 11 8.67613 11.9482 10.364 13.636C12.0518 15.3239 13 17.6131 13 20M4 4C8.24346 4 12.3131 5.68571 15.3137 8.68629C18.3143 11.6869 20 15.7565 20 20M6 19C6 19.5523 5.55228 20 5 20C4.44772 20 4 19.5523 4 19C4 18.4477 4.44772 18 5 18C5.55228 18 6 18.4477 6 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <div className="flex flex-col text-left">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase text-indigo-600">Coming Soon...</span>
+                    <span className="text-[10px] font-bold uppercase text-pink-600">Coming Soon...</span>
                   </div>
                   <span className="text-sm font-bold text-black leading-tight">NFC Tap-to-Order</span>
                   <p className="text-[11px] text-black/40 font-bold">Enterprise exclusive for Q3</p>

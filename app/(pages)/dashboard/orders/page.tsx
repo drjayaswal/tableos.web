@@ -280,14 +280,14 @@ function ActionButtons({
         if (isPaid) {
             return (
                 <div className="grid grid-cols-2 gap-1.5">
-                    <button onClick={() => onDecline(orderId)} className={cn(base, "border border-red-500 text-white bg-red-600 hover:bg-red-700")}>Decline</button>
+                    <button onClick={() => onDecline(orderId)} className={cn(base, "border border-pink-500 text-white bg-red-600 hover:bg-red-700")}>Decline</button>
                     <button onClick={() => onVerifyPayment(orderId)} className={cn(base, "bg-green-600 text-white hover:bg-green-700")}>Accept Payment</button>
                 </div>
             );
         } else {
             return (
                 <div className="grid grid-cols-2 gap-1.5">
-                    <button onClick={() => onDecline(orderId)} className={cn(base, "border border-red-500 text-white bg-red-600 hover:bg-red-700")}>Decline</button>
+                    <button onClick={() => onDecline(orderId)} className={cn(base, "border border-pink-500 text-white bg-red-600 hover:bg-red-700")}>Decline</button>
                     <button onClick={() => onAccept(orderId)} className={cn(base, "bg-blue-600 text-white hover:bg-blue-700")}>Accept Order</button>
                 </div>
             );
@@ -584,7 +584,7 @@ export default function OrdersPage() {
                                 </motion.div>
                             </section>
                         )}
-                        
+
                         {orders.length === 0 && sessions.length === 0 && !loading && (
                             <div className="flex flex-col items-center justify-center py-20 text-center">
                                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">

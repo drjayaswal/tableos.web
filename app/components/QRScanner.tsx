@@ -74,10 +74,12 @@ export function QRScanner({ onClose, onScanSuccess }: QRScannerProps) {
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200/50">
           <div className="flex items-center gap- rounded-l-4xl overflow-hidden">
-            <Image src="/assets/tableOS-logo.svg" alt="Logo" width={28} height={28} />
+            <Image src="/assets/tableOS-logo.svg" alt="Logo" width={28} height={28}
+              priority
+            />
             <span className="text-[18.5px] text-main bg-linear-to-r from-main/20 via-main/10 to-main/1 px-2 pr-3 font-bold tracking-tight">tableOS</span>
           </div>
-          <button onClick={onClose} className="sm:text-gray-400 hover:text-red-500 text-red-500 p-1 cursor-pointer transition-colors">
+          <button onClick={onClose} className="sm:text-gray-400 hover:text-pink-500 text-pink-500 p-1 cursor-pointer transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 9L9 15M9 9L15 15M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

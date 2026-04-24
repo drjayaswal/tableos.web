@@ -24,7 +24,9 @@ const modalVariants = {
 function TableOSLogo() {
   return (
     <div className="flex items-center gap-2.5">
-      <Image src="/assets/tableOS-logo.svg" alt="tableOS" width={50} height={50} />
+      <Image src="/assets/tableOS-logo.svg" alt="tableOS" width={50} height={50}
+
+        priority />
       <div className="text-3xl font-bold text-black">tableOS</div>
     </div>
   );
@@ -192,7 +194,8 @@ function BillFooter() {
       <div className="px-7 pb-3 pt-2 text-center text-gray-400 flex font-bold items-center justify-center gap-2 text-xs">
         Powered by
         <span className="flex bg-black/25 text-black items-center gap-1 px-1 p-px rounded">
-          <Image src="/assets/tableOS-logo.svg" alt="tableOS" width={15} height={15} />
+          <Image src="/assets/tableOS-logo.svg" alt="tableOS" width={15} height={15}
+            priority />
           tableOS
         </span>
       </div>

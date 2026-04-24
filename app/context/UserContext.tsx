@@ -60,7 +60,8 @@ export const GlobalTableOSLoader = () => (
                 alt="Logo" 
                 width={25} 
                 height={25} 
-                className='absolute top-2.75 left-2.75' 
+                className='absolute top-2.75 left-2.75'
+                priority
             />
         </div>
     </div>

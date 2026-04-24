@@ -30,7 +30,7 @@ const ContactPage = () => {
         <div className="min-h-screen bg-white font-sans text-black">
             <header className="bg-gray-200/50 shadow-inner py-20 md:py-30 px-6 relative overflow-hidden">
                 <div className="absolute top-20 right-20 p-20 grayscale opacity-5 pointer-events-none">
-                    <Image src="/assets/tableOS-logo.svg" className='scale-400' alt="TableOS Logo" width={150} height={150} />
+                    <Image src="/assets/tableOS-logo.svg" className='scale-400' alt="TableOS Logo" width={150} height={150} priority />
                 </div>
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-black mb-6">

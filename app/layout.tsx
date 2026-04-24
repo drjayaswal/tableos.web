@@ -88,6 +88,7 @@ export default function RootLayout({
       lang="en"
       className={`${fontSans.variable} ${fontCode.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <head>
         <script

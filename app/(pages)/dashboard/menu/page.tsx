@@ -192,7 +192,7 @@ function MenuItemCard({
                     </button>
                     <button
                         onClick={() => onDelete(item.id)}
-                        className="flex items-center gap-1 cursor-pointer text-[10px] font-bold text-gray-400 hover:text-red-500 transition-colors"
+                        className="flex items-center gap-1 cursor-pointer text-[10px] font-bold text-gray-400 hover:text-pink-500 transition-colors"
                     >
                         <TrashIcon /> Delete
                     </button>
@@ -202,7 +202,7 @@ function MenuItemCard({
                         "text-[9px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full transition-all",
                         item.isAvailable
                             ? "bg-emerald-500/10 text-emerald-600"
-                            : "bg-red-500/10 text-red-500"
+                            : "bg-pink-500/10 text-pink-500"
                     )}
                 >
                     {item.isAvailable ? "Available" : "Sold Out"}
@@ -391,7 +391,7 @@ function ItemModal({
                     </div>
                     <button
                         onClick={onClose}
-                        className="flex h-8 w-8 items-center justify-center cursor-pointer rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-500 transition-colors"
+                        className="flex h-8 w-8 items-center justify-center cursor-pointer rounded-xl text-gray-400 hover:bg-pink-500/10 hover:text-pink-500 transition-colors"
                     >
                         <CancelIcon className="w-5 h-5" />
                     </button>
@@ -512,7 +512,7 @@ function ItemModal({
                             onClick={() => setField("isAvailable", !form.isAvailable)}
                             className={cn(
                                 "relative h-6 w-11 cursor-pointer rounded-full border transition-all duration-200 shrink-0",
-                                form.isAvailable ? "bg-green-600 border-green-600" : "bg-red-500 border-red-500"
+                                form.isAvailable ? "bg-green-600 border-green-600" : "bg-pink-500 border-pink-500"
                             )}
                         >
                             <span className={cn(
@@ -534,7 +534,7 @@ function ItemModal({
                         variant="tableos"
                         size="sm"
                         onClick={onClose}
-                        className="text-gray-500 shadow-none! border-0! hover:bg-red-500/10! hover:text-red-500!"
+                        className="text-gray-500 shadow-none! border-0! hover:bg-pink-500/10! hover:text-pink-500!"
                     >
                         Cancel
                     </Button>
@@ -583,7 +583,7 @@ function DeleteModal({
                 className="relative w-full max-w-sm rounded-2xl bg-white shadow-2xl z-10 p-6"
             >
                 <div className="flex items-start gap-3 mb-5">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-500">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-50 text-pink-500">
                         <TrashIcon />
                     </div>
                     <div>
@@ -599,7 +599,7 @@ function DeleteModal({
                     </Button>
                     <Button
                         variant="tableos" size="sm" onClick={onConfirm} disabled={loading}
-                        className="bg-red-500! text-white! border-red-500! hover:bg-red-600!"
+                        className="bg-pink-500! text-white! border-pink-500! hover:bg-red-600!"
                     >
                         {loading ? <span className="flex items-center gap-1.5"><Loading />Deleting…</span> : "Delete"}
                     </Button>

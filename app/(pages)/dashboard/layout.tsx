@@ -24,7 +24,7 @@ function SidebarContent({ isCollapsed, isMobile = false, onClose }: { isCollapse
     <div className="flex flex-col h-full">
       <div className={`flex items-center gap-3 p-4 border-b border-gray-200 shrink-0 ${collapsed ? "justify-center" : ""}`}>
         <div className="w-8 h-8 flex items-center justify-center shrink-0">
-          <Image src="/assets/tableOS-logo.svg" alt="Logo" width={25} height={25} />
+          <Image src="/assets/tableOS-logo.svg" alt="Logo" width={25} height={25} priority />
         </div>
         {!collapsed && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden whitespace-nowrap">
