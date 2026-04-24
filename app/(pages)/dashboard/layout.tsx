@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CancelIcon, EmployeeIcon, HomeIcon, MenuIcon, OrderIcon, StoreIcon, TableIcon } from "@/app/components/icons/svg";
 
 const navItems = [
-  { name: "Home", href: "/", icon: HomeIcon },
+  { name: "Home", href: "/dashboard/home", icon: HomeIcon },
   { name: "Employees", href: "/dashboard/employee", icon: EmployeeIcon },
   { name: "Store", href: "/dashboard/store", icon: StoreIcon },
   { name: "Menu", href: "/dashboard/menu", icon: MenuIcon },

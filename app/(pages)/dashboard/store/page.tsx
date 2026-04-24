@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../../components/ui/button";
-import { StoreIcon, CancelIcon, CheckIcon, WarningIcon, LocationIcon, PlusIcon, MinusIcon, TableIcon, SaveIcon, Loading } from "@/app/components/icons/svg";
+import { StoreIcon, CancelIcon, CheckIcon, WarningIcon, LocationIcon, PlusIcon, MinusIcon, SaveIcon, Loading } from "@/app/components/icons/svg";
 import { useUser } from "@/app/context/UserContext";
 import { apiRequest } from "@/app/utility/api";
 import { AddressSuggestion, searchAddressSuggestions } from "@/app/utility/geocoding";
@@ -60,7 +60,6 @@ function buildDefaultTiming(): StoreTiming {
   ) as unknown as StoreTiming;
 }
 
-// ─── Motion Variants ──────────────────────────────────────────────────────────
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
@@ -71,7 +70,6 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 25, stiffness: 300 } },
 } as const;
 
-// ─── Shared Components ────────────────────────────────────────────────────────
 function FieldLabel({ label }: { label: string }) {
   return (
     <label className="flex items-center gap-1.5 text-xs font-bold text-gray-500 mb-1.5 uppercase">
@@ -157,7 +155,6 @@ function TimingEditor({ timing, onChange }: { timing: StoreTiming; onChange: (t:
   );
 }
 
-// ─── Main Page Component ─────────────────────────────────────────────────────
 export default function StorePage() {
   const { storeId } = useUser();
   const searchTimeout = useRef<NodeJS.Timeout | null>(null);

@@ -31,14 +31,14 @@ export default function Navbar() {
     }
 
     const navItems = [
+        { name: "Home", href: "/", icon: <HomeIcon className="w-5 h-5" /> },
+        { name: "Scan", href: "/scan", icon: <ScanIcon className="w-5 h-5" /> },
         ...(role === 'owner' ? [{
             name: "Dashboard", href: "/dashboard", icon: <StoreIcon className="w-5 h-5" />
         }] : []),
-        { name: "Home", href: "/", icon: <HomeIcon className="w-5 h-5" /> },
-        { name: "Scan", href: "/scan", icon: <ScanIcon className="w-5 h-5" /> },
         { name: "How to Use", href: "/how-to-use", icon: <InfoIcon className="w-5 h-5" /> },
-        { name: "About", href: "/about", icon: <InfoIcon className="w-5 h-5" /> },
         { name: "Contact", href: "/contact", icon: <InfoIcon className="w-5 h-5" /> },
+        { name: "About", href: "/about", icon: <InfoIcon className="w-5 h-5" /> },
     ];
 
     const handleMouseEnter = () => {
