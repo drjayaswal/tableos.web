@@ -10,7 +10,6 @@ import { toast } from "sonner";
 import { cn } from "@/app/lib/utils";
 import { QRCodeSVG } from "qrcode.react";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface Table {
     id: string;
     tableLabel: string;
@@ -26,7 +25,6 @@ export interface ApiResponse {
     };
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
 export default function TablesPage() {
     const { storeId } = useUser();
     const [tables, setTables] = useState<Table[]>([]);
@@ -40,7 +38,7 @@ export default function TablesPage() {
                 setTables(res.data.tables);
             }
         } catch {
-            toast.error("Failed to fetch tables");
+            toast("Failed to fetch tables");
         } finally {
             setLoading(false);
         }

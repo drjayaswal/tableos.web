@@ -67,7 +67,6 @@ interface DashboardResponse {
 }
 
 export default function StoreDashboard() {
-  // const { name, category, tables, orders, stats, menu } = data;
   const { storeId } = useUser();
   const [loading, setLoading] = useState(true);
   const [storeData, setStoreData] = useState<StoreData | null>(null);
@@ -91,7 +90,7 @@ export default function StoreDashboard() {
 
   if (loading) {
     return (
-      <GlobalTableOSLoader/>
+      <GlobalTableOSLoader />
     );
   }
 
@@ -109,13 +108,10 @@ export default function StoreDashboard() {
     <div className="min-h-screen text-black font-sans">
       <header className="mb-8 flex justify-between items-end">
         <div>
-          <p className="text-sm font-medium text-gray-500 uppercase tracking-wider">Dashboard</p>
           <h1 className="text-3xl font-bold tracking-tight">{name}</h1>
-          <div className="flex gap-3 mt-2">
-            <span className="px-2 py-1 rounded bg-gray-200 text-[10px] font-bold uppercase tracking-tighter">
-              {category}
-            </span>
-          </div>
+          <p className="text-sm text-gray-400 ml-0.5">
+            {loading ? "Loading staff..." : `${storeData.tables.length} tables across your store...`}
+          </p>
         </div>
         <div className="text-right">
           <p className="text-sm text-gray-500">Total Revenue (Recent)</p>

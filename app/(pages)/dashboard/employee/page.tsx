@@ -140,7 +140,7 @@ function Modal({ mode, employee, onClose, onFire, onSuccess }: ModalProps) {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ type: "spring", damping: 28, stiffness: 300 }}
-                className="relative w-full max-w-md mx-auto rounded-lg bg-white shadow-2xl z-10 overflow-hidden flex flex-col max-h-[90vh]"
+                className="relative w-full max-w-md mx-auto rounded-3xl bg-white shadow-2xl z-10 overflow-hidden flex flex-col max-h-[90vh]"
             >
                 <div className="flex items-center justify-between border-b border-gray-100 px-5 sm:px-6 py-4 sm:py-5 shrink-0">
                     <div>
@@ -227,11 +227,11 @@ function EmployeeCard({ emp, onEdit }: { emp: Employee; onEdit: (emp: Employee) 
     return (
         <motion.div
             layout
-            className="group relative rounded-lg border border-gray-100 bg-white p-5 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+            className="group relative rounded-3xl border border-gray-100 bg-white p-5 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
         >
             <Button
                 onClick={() => onEdit(emp)}
-                className="text-sm! absolute top-4 cursor-pointer right-4 opacity-0 group-hover:opacity-100 px-4! py-2!"
+                className="text-xs! h-8  absolute top-4 cursor-pointer right-4 px-3! py-2!"
                 title="Edit employee"
             >
                 Edit
@@ -241,10 +241,9 @@ function EmployeeCard({ emp, onEdit }: { emp: Employee; onEdit: (emp: Employee) 
                 <Avatar name={emp.name} size={44} />
                 <div className="min-w-0">
                     <p className="font-bold text-gray-900 text-sm truncate">{emp.name}</p>
-                    <span className="inline-flex items-center gap-1 mt-0.5 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-600 uppercase tracking-wide">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 inline-block" />
-                        Staff
-                    </span>
+                    <p className="text-[11px] text-gray-400">
+                        Joined {new Date(emp.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                    </p>
                 </div>
             </div>
 
@@ -260,12 +259,6 @@ function EmployeeCard({ emp, onEdit }: { emp: Employee; onEdit: (emp: Employee) 
                         </span>
                     )}
                 </div>
-            </div>
-
-            <div className="pt-3 mt-3 border-t border-gray-100">
-                <p className="text-[11px] text-gray-400">
-                    Joined {new Date(emp.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
-                </p>
             </div>
         </motion.div>
     );
@@ -319,10 +312,10 @@ export default function EmployeesPage() {
             });
 
             if (res.status !== 200) throw new Error(res.message);
-            toast.success("Employee removed");
+            toast("Employee removed");
             fetchEmployees();
         } catch (err: any) {
-            toast.error(err.message ?? "Something went wrong.");
+            toast(err.message ?? "Something went wrong.");
         } finally {
             setModal({ mode: null });
             setLoading(false);

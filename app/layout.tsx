@@ -98,8 +98,12 @@ export default function RootLayout({
       </head>
       <body
         style={{
-          backgroundImage: `radial-gradient(circle, var(--landing-grid) 1.2px, transparent 1.2px)`,
-          backgroundSize: '24px 24px',
+          backgroundColor: "white",
+          backgroundImage: `
+      repeating-linear-gradient(45deg, var(--landing-grid) 0, var(--landing-grid) 1px, transparent 0, transparent 5px),
+      repeating-linear-gradient(-45deg, var(--landing-grid) 0, var(--landing-grid) 1px, transparent 0, transparent 5px)
+    `,
+          backgroundAttachment: 'fixed',
         }}
         className="min-h-screen flex flex-col text-secondary font-sans selection:bg-black selection:text-white"
       >

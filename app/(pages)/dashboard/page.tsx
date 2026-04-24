@@ -53,7 +53,7 @@ export default function DashboardHome() {
           <motion.a
             key={item.name}
             href={item.href}
-            className="group relative bg-white border-2 border-gray-200/30 sm:border-gray-200 rounded-md p-5 flex flex-col justify-between h-32 sm:shadow-none shadow-sm hover:shadow-sm transition-all duration-300 overflow-hidden"
+            className="group relative bg-white border-2 border-gray-200/50 hover:border-gray-200 rounded-md p-5 flex flex-col justify-between h-32 sm:shadow-none shadow-sm hover:shadow-sm transition-all duration-300 overflow-hidden"
           >
             <div className="flex items-center justify-between">
               <item.icon size={28} className="text-black/80 group-hover:text-black transition-colors duration-300" />
@@ -62,6 +62,7 @@ export default function DashboardHome() {
                 height="20"
                 viewBox="0 0 24 24"
                 fill="none"
+                className="group-hover:translate-x-1 transition-transform duration-200"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path

@@ -12,7 +12,6 @@ import { apiRequest } from "@/app/utility/api";
 import { toast } from "sonner";
 import { cn } from "@/app/lib/utils";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 type DietaryType = "veg" | "non-veg" | "vegan" | "jain";
 type CategoryKey =
     | "beverages" | "coffee_tea" | "alcohol" | "appetizers" | "soups"
@@ -152,8 +151,8 @@ function MenuItemCard({
         <motion.div
             layout
             className={cn(
-                "group relative rounded-xl border bg-white py-3 px-4 sm:py-4 sm:px-5 transition-all duration-200",
-                !item.isAvailable ? "opacity-60 border-transparent shadow-none" : "border-gray-200 shadow-md"
+                "group relative rounded-xl border-2 bg-white py-3 px-4 sm:py-4 sm:px-5 transition-all duration-200",
+                !item.isAvailable ? "opacity-60 border-transparent" : "border-gray-200/75"
             )}
         >
             <div className="flex items-start justify-between gap-3 mb-3">
@@ -169,7 +168,7 @@ function MenuItemCard({
                     </div>
                     <h3 className="font-bold text-md text-gray-900 truncate">{item.itemName}</h3>
                     {item.itemDescription && (
-                        <p className="text-sm text-gray-400 mt-0.5">{item.itemDescription}</p>
+                        <p className="text-sm text-gray-400 font-bold mt-0.5">{item.itemDescription}</p>
                     )}
                 </div>
                 <div className="text-right shrink-0">
@@ -183,10 +182,10 @@ function MenuItemCard({
             </div>
 
             <div className="flex items-center justify-between pt-3">
-                <div className="flex gap-3 sm:opacity-0 opacity-100 group-hover:opacity-100 transition-opacity">
+                <div className="flex gap-3">
                     <button
                         onClick={() => onEdit(item)}
-                        className="flex items-center gap-1 cursor-pointer text-[10px] font-bold text-gray-400 hover:text-gray-700 transition-colors"
+                        className="flex items-center gap-1 cursor-pointer text-[10px] font-bold text-gray-400 hover:text-green-600 transition-colors"
                     >
                         <EditIcon /> Edit
                     </button>
@@ -333,7 +332,7 @@ function ItemModal({
             const res = await apiRequest<ApiResponse>(endpoint, { method, body });
             if (res.status !== 200) throw new Error(res.message);
 
-            toast.success(isEdit ? "Item updated" : "Item created");
+            toast(isEdit ? "Item updated" : "Item created");
             onSuccess();
             onClose();
         } catch (err: any) {
@@ -639,9 +638,9 @@ export default function MenuPage() {
         try {
             const res = await apiRequest<ApiResponse>(`/owner/menu/list?storeId=${storeId}`);
             if (res.status === 200) setItems(res.data.items ?? []);
-            else toast.error(res.message);
+            else toast(res.message);
         } catch {
-            toast.error("Failed to load menu");
+            toast("Failed to load menu");
         } finally {
             setLoading(false);
         }
@@ -685,10 +684,10 @@ export default function MenuPage() {
                 setItems((prev) =>
                     prev.map((i) => i.id === item.id ? { ...i, isAvailable: !i.isAvailable } : i)
                 );
-                toast.success(`${item.itemName} marked as ${!item.isAvailable ? "available" : "sold out"}`);
+                toast(`${item.itemName} marked as ${!item.isAvailable ? "available" : "sold out"}`);
             } else throw new Error(res.message);
         } catch (err: any) {
-            toast.error(err.message ?? "Failed to update");
+            toast(err.message ?? "Failed to update");
         }
     };
 
@@ -699,11 +698,11 @@ export default function MenuPage() {
             const res = await apiRequest<ApiResponse>(`/owner/menu/item/${deletingItem.id}`, { method: "DELETE" });
             if (res.status === 200) {
                 setItems((prev) => prev.filter((i) => i.id !== deletingItem.id));
-                toast.success("Item removed");
+                toast("Item removed");
                 setDeletingItem(null);
             } else throw new Error(res.message);
         } catch (err: any) {
-            toast.error(err.message ?? "Failed to delete");
+            toast(err.message ?? "Failed to delete");
         } finally {
             setDeleteLoading(false);
         }

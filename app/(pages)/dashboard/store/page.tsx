@@ -83,9 +83,9 @@ const inputCls =
 
 function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <motion.div variants={itemVariants} className="rounded-lg border h-fit border-gray-100 bg-white p-5 shadow-sm">
+    <motion.div variants={itemVariants} className="rounded-3xl border h-fit border-gray-100 bg-white p-5 shadow-sm">
       <div className="flex items-center gap-2 mb-5">
-        <h2 className="text-sm font-bold text-gray-900 tracking-tight">{title}</h2>
+        <h2 className="text-xl font-bold text-gray-900 tracking-tight">{title}</h2>
       </div>
       {children}
     </motion.div>
@@ -116,7 +116,7 @@ function TimingEditor({ timing, onChange }: { timing: StoreTiming; onChange: (t:
           <div
             key={day}
             className={cn(
-              "flex items-center gap-3 rounded-xl px-3 py-2 transition-colors"
+              "flex items-center gap-3"
             )}
           >
             <span className="w-8 text-xs font-bold text-gray-500 shrink-0">{DAY_LABELS[day]}</span>
@@ -126,7 +126,7 @@ function TimingEditor({ timing, onChange }: { timing: StoreTiming; onChange: (t:
                 value={slot.open_time}
                 disabled={!slot.is_open}
                 onChange={(e) => update(day, "open_time", e.target.value)}
-                className="flex-1 min-w-0 rounded-lg border border-gray-200/50 bg-gray-50 px-2 py-1 text-xs text-black font-bold focus:outline-none focus:border-gray-200 transition-all"
+                className="flex-1 min-w-0 rounded-xl bg-gray-100 px-2 py-1 text-xs text-black font-bold focus:outline-none focus:border-gray-200 transition-all"
               />
               <span className="text-xs text-gray-200"></span>
               <input
@@ -257,12 +257,12 @@ export default function StorePage() {
       if (res.status !== 200) throw new Error(res.message);
 
       setStore(prev => prev ? { ...prev, name: form.name } : null);
-      toast.success("Store settings updated.");
+      toast("Store settings updated.");
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
       setError(err.message ?? "Failed to save store.");
-      toast.error(err.message ?? "Failed to save store.");
+      toast(err.message ?? "Failed to save store.");
     } finally {
       setSaving(false);
     }
@@ -339,7 +339,7 @@ export default function StorePage() {
               <SkeletonCard rows={7} />
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
 
               <SectionCard title="Information">
                 <div className="space-y-4">

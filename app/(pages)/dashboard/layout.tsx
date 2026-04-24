@@ -5,15 +5,17 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CancelIcon, EmployeeIcon, HomeIcon, MenuIcon, OrderIcon, StoreIcon, TableIcon } from "@/app/components/icons/svg";
+import { CancelIcon, EmployeeIcon, HomeIcon, MenuIcon, DataIcon, OrderIcon, StoreIcon, TableIcon } from "@/app/components/icons/svg";
 
 const navItems = [
-  { name: "Home", href: "/dashboard/home", icon: HomeIcon },
+  { name: "Home", href: "/", icon: HomeIcon },
+  { name: "Data", href: "/dashboard/data", icon: DataIcon },
   { name: "Employees", href: "/dashboard/employee", icon: EmployeeIcon },
   { name: "Store", href: "/dashboard/store", icon: StoreIcon },
   { name: "Menu", href: "/dashboard/menu", icon: MenuIcon },
   { name: "Orders", href: "/dashboard/orders", icon: OrderIcon },
   { name: "Tables", href: "/dashboard/tables", icon: TableIcon },
+  { name: "Disconnect", href: "-", icon: TableIcon },
 ];
 
 function SidebarContent({ isCollapsed, isMobile = false, onClose }: { isCollapsed: boolean; isMobile?: boolean; onClose?: () => void; }) {
@@ -28,8 +30,8 @@ function SidebarContent({ isCollapsed, isMobile = false, onClose }: { isCollapse
         </div>
         {!collapsed && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden whitespace-nowrap">
-            <p className="text-sm font-bold text-black leading-none">tableOS</p>
-            <p className="text-[10px] text-gray-400 font-medium mt-0.5">Dashboard</p>
+            <p className="text-xl font-bold text-black leading-none">tableOS</p>
+            <p className="text-[14px] text-gray-400 font-semibold mt-0.5">/dashboard</p>
           </motion.div>
         )}
         {isMobile && (

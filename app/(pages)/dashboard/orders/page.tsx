@@ -342,7 +342,7 @@ export default function OrdersPage() {
 
         socket.on("order:new", (data: any) => {
             const orderRef = data.id ? ` #${data.id.slice(0, 6).toUpperCase()}` : "";
-            toast.success("New Order Received", {
+            toast("New Order Received", {
                 description: `Table ${data.tableLabel} placed order${orderRef} for ₹${data.totalAmount}.`,
                 duration: 10000,
             });
@@ -351,13 +351,13 @@ export default function OrdersPage() {
         });
 
         socket.on("bill:payment:intent", (data: any) => {
-            toast.info("Payment Verification Required", {
+            toast("Payment Verification Required", {
                 description: `UPI payment intent received for Table ${data.tableLabel || "Session"}. Verify the transaction?`,
                 action: {
                     label: "Approve",
                     onClick: () => {
                         socket.emit("verify:session_payment", { tableSessionId: data.tableSessionId, storeId });
-                        toast.success("Payment Approved", { description: "Session balance updated to paid." });
+                        toast("Payment Approved", { description: "Session balance updated to paid." });
                         fetchData();
                     }
                 },
@@ -365,7 +365,7 @@ export default function OrdersPage() {
                     label: "Decline",
                     onClick: () => {
                         socket.emit("decline:session_payment", { tableSessionId: data.tableSessionId, storeId });
-                        toast.error("Payment Declined", { description: "Notification sent back to the customer." });
+                        toast("Payment Declined", { description: "Notification sent back to the customer." });
                     }
                 },
                 duration: Infinity
@@ -405,21 +405,21 @@ export default function OrdersPage() {
     const verifyPayment = (orderId: string) => {
         if (!socket || !storeId) return;
         socket.emit("verify:payment", { orderId, storeId });
-        toast.success(`Order #${orderId.slice(0, 4)}... Confirmed!`);
+        toast(`Order #${orderId.slice(0, 4)}... Confirmed!`);
         fetchData();
     };
 
     const declineOrder = (orderId: string) => {
         if (!socket || !storeId) return;
         socket.emit("order:decline", { orderId, storeId });
-        toast.error(`Order #${orderId.slice(0, 4)}... Declined!`);
+        toast(`Order #${orderId.slice(0, 4)}... Declined!`);
         fetchData();
     };
 
     const acceptOrder = (orderId: string) => {
         if (!socket || !storeId) return;
         socket.emit("order:accept", { orderId, storeId });
-        toast.success(`Order #${orderId.slice(0, 4)}... Accepted!`);
+        toast(`Order #${orderId.slice(0, 4)}... Accepted!`);
         fetchData();
     };
 
@@ -430,11 +430,11 @@ export default function OrdersPage() {
                 body: { orderId, status },
             });
             if (res.status === 200) {
-                toast.success(`Order #${orderId.slice(0, 4)}... ${status.charAt(0).toUpperCase() + status.slice(1)}!`);
+                toast(`Order #${orderId.slice(0, 4)}... ${status.charAt(0).toUpperCase() + status.slice(1)}!`);
                 fetchData();
             }
         } catch {
-            toast.error("Failed to update");
+            toast("Failed to update");
         }
     };
 
@@ -445,9 +445,9 @@ export default function OrdersPage() {
             if (res.status === 200) {
                 setBillData(res.data);
                 setShowBill(true);
-            } else toast.error(res.message);
+            } else toast(res.message);
         } catch (err: any) {
-            toast.error(err.message);
+            toast(err.message);
         } finally {
             setFetchingBill(false);
         }
@@ -466,23 +466,23 @@ export default function OrdersPage() {
                     body: { tableSessionId }
                 });
                 if (res.status === 200) {
-                    toast.success(msg);
+                    toast(msg);
                     fetchData();
                 } else {
-                    toast.error(res.message);
+                    toast(res.message);
                 }
             } catch (err: any) {
-                toast.error(err.message);
+                toast(err.message);
             }
         };
 
         if (unpaidAmount > 0) {
-            toast.warning(`Unpaid Amount: ₹${unpaidAmount.toFixed(2)}`, {
+            toast(`Unpaid Amount: ₹${unpaidAmount.toFixed(2)}`, {
                 description: "Confirm collection of payment and end session?",
                 action: { label: "Collect & End", onClick: () => endSession("Payment collected and session ended!") }
             });
         } else {
-            toast.info("End this session?", {
+            toast("End this session?", {
                 action: { label: "Yes", onClick: () => endSession("Session ended and table freed!") }
             });
         }
@@ -511,9 +511,7 @@ export default function OrdersPage() {
                 </motion.header>
 
                 {loading ? (
-                    <div className="flex justify-center py-24">
-                        <Loading className="animate-spin w-4 h-4" />
-                    </div>
+                    <div className="flex items-center justify-center py-20"><Loading className="w-10 h-10 animate-spin" /></div>
                 ) : (
                     <div className="space-y-12">
                         <section className="space-y-4">

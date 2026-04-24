@@ -6,16 +6,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useUser } from "../context/UserContext";
-import { HomeIcon, InfoIcon, ScanIcon, StoreIcon } from "./icons/svg";
+import { DisconnectIcon, HomeIcon, InfoIcon, ScanIcon, StoreIcon } from "./icons/svg";
+import { toast } from "sonner";
+import { apiRequest } from "../utility/api";
+import { ApiResponse } from "../(pages)/dashboard/tables/page";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
     const { role } = useUser();
+    const router = useRouter();
     const navRef = useRef<HTMLDivElement>(null);
     const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const logout = async () => {
+        const toastId = toast.loading("Disconnecting...");
 
+        try {
+            const res = await apiRequest<ApiResponse>("/auth/disconnect");
+            if (!res.status) {
+                toast("Disconnect failed!", { id: toastId });
+                return
+            }
+            toast(res.message, { id: toastId });
+
+            document.cookie = "better-auth.session_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+            document.cookie = "better-auth.csrf_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+
+            router.push("/connect");
+        } catch (error) {
+            console.error(error);
+            toast.error("Logout failed", { id: toastId });
+        }
+    };
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (mobileOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
@@ -33,12 +56,26 @@ export default function Navbar() {
     const navItems = [
         { name: "Home", href: "/", icon: <HomeIcon className="w-5 h-5" /> },
         { name: "Scan", href: "/scan", icon: <ScanIcon className="w-5 h-5" /> },
+
         ...(role === 'owner' ? [{
-            name: "Dashboard", href: "/dashboard", icon: <StoreIcon className="w-5 h-5" />
+            name: "Dashboard",
+            href: "/dashboard",
+            icon: <StoreIcon className="w-5 h-5" />
         }] : []),
+
         { name: "How to Use", href: "/how-to-use", icon: <InfoIcon className="w-5 h-5" /> },
         { name: "Contact", href: "/contact", icon: <InfoIcon className="w-5 h-5" /> },
         { name: "About", href: "/about", icon: <InfoIcon className="w-5 h-5" /> },
+
+        ...(role ? [{
+            name: "Disconnect",
+            href: "/",
+            icon: <DisconnectIcon className="w-5 h-5" />
+        }] : [{
+            name: "Connect",
+            href: "/connect",
+            icon: <DisconnectIcon className="w-5 h-5" />
+        }]),
     ];
 
     const handleMouseEnter = () => {
@@ -79,12 +116,32 @@ export default function Navbar() {
                             <div className="flex items-center gap-1 bg-white border border-gray-200 shadow-lg shadow-black/10 rounded-xl px-2 py-1.5">
                                 {navItems.map((item) => {
                                     const isActive = pathname === item.href;
+                                    const isDisconnect = item.name === "Disconnect";
                                     return (
                                         <Link
                                             key={item.name}
-                                            href={item.href}
-                                            onClick={() => setIsOpen(false)}
+                                            href={isDisconnect ? "/" : item.href}
+                                            onClick={() => {
+                                                setIsOpen(false);
+
+                                                if (isDisconnect) {
+                                                    toast("Disconnecting?", {
+                                                        description: "You'll need to connect again!",
+                                                        action: {
+                                                            label: "Disconnect",
+                                                            onClick: () => {
+                                                                logout();
+                                                            },
+                                                        },
+                                                        cancel: {
+                                                            label: "Cancel",
+                                                            onClick: () => toast("Cancelled!"),
+                                                        },
+                                                    });
+                                                }
+                                            }}
                                             className={`relative px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 cursor-pointer
+                                                ${isDisconnect && "text-pink-600 bg-pink-600/10 hover:bg-pink-600 hover:text-white no-underline!"}
                                                 ${isActive
                                                     ? "text-black underline underline-offset-4"
                                                     : "text-gray-400 hover:text-black hover:bg-gray-200/75"
@@ -100,7 +157,7 @@ export default function Navbar() {
                 </AnimatePresence>
             </header>
 
-               <nav className="fixed top-0 left-0 w-full z-50 px-4 py-4 md:hidden">
+            <nav className="fixed top-0 left-0 w-full z-50 px-4 py-4 md:hidden">
                 <div className="flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-gray-200 shadow-sm rounded-2xl px-3 py-2">
                         <Image src="/assets/tableOS-logo.svg" alt="tableOS" width={22} height={22} priority />

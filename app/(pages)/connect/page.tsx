@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "../../lib/utils";
+import { cn, generatePlaceholder } from "../../lib/utils";
 import { apiRequest } from "../../utility/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -9,45 +9,13 @@ import Image from "next/image";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { AddressSuggestion, searchAddressSuggestions } from "@/app/utility/geocoding";
 import { Button } from "@/app/components/ui/button";
-import { LocationIcon, TableIcon } from "@/app/components/icons/svg";
-
-function CoffeeIcon({ className }: { className?: string }) {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M17 8H18C19.0609 8 20.0783 8.42143 20.8284 9.17157C21.5786 9.92172 22 10.9391 22 12C22 13.0609 21.5786 14.0783 20.8284 14.8284C20.0783 15.5786 19.0609 16 18 16H17M17 8H3V17C3 18.0609 3.42143 19.0783 4.17157 19.8284C4.92172 20.5786 5.93913 21 7 21H13C14.0609 21 15.0783 20.5786 15.8284 19.8284C16.5786 19.0783 17 18.0609 17 17V8ZM6 1V4M10 1V4M14 1V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ForkKnifeIcon({ className }: { className?: string }) {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M3 2V10C3 11.1046 3.89543 12 5 12H7C8.10457 12 9 11.1046 9 10V2M6 12V22M17 2V7C17 8.5 18 10 20 10M17 15H20L17 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function BedIcon({ className }: { className?: string }) {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 4V20M2 16H22V20M2 12H10V16M22 12V20M14 12H18C19.1046 12 20 11.1046 20 10V8C20 6.89543 19.1046 6 18 6H14C12.8954 6 12 6.89543 12 8V10C12 11.1046 12.8954 12 14 12ZM6 12C7.65685 12 9 10.6569 9 9C9 7.34315 7.65685 6 6 6C4.34315 6 3 7.34315 3 9C3 10.6569 4.34315 12 6 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-const CURRENCY_OPTIONS = [
-  { label: "INR (₹)", value: "INR" },
-  { label: "USD ($)", value: "USD" },
-  { label: "EUR (€)", value: "EUR" },
-];
+import { BedIcon, CoffeeIcon, LocationIcon, MenuIcon, TableIcon } from "@/app/components/icons/svg";
 
 type View = "landing" | "create" | "signin";
 type CreateStep = "category" | "form" | "otp";
 type SignInStep = "email" | "owner_password" | "staff_otp";
 type HorecaCategory = "cafe" | "hotel" | "restaurant";
 type UserRole = "owner" | "staff" | "customer";
-
-const PASSWORD_ROLES: UserRole[] = ["owner", "staff"];
 
 const pageVariants: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -66,18 +34,19 @@ const fadeUp: Variants = {
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-8 md:p-10">
+    <div className="w-full bg-white overflow-hidden rounded-4xl shadow-md shadow-black/15 relative border border-gray-200 p-5 sm:p-8 md:p-10">
+      <Logo />
       {children}
+      <div className="opacity-10 absolute -bottom-4 -right-4"><Image src="/assets/tableOS-logo.svg" alt="TableOS Logo" width={100} height={100} priority /></div>
     </div>
   );
 }
 
 function Logo() {
   return (
-    <div className="absolute bottom-4 left-4 items-center justify-center">
-      <div className="bg-white rounded-3xl shadow-sm shadow-black/25 border border-gray-200 p-1">
-        <Image src="/assets/tableOS-logo.svg" alt="TableOS Logo" width={20} height={20} priority />
-      </div>
+    <div className="flex items-center opacity-10 sm:scale-200 scale-170 justify-center gap-2 mb-6">
+      <Image src="/assets/tableOS-logo.svg" alt="TableOS Logo" width={50} height={50} priority />
+      <span className="text-5xl font-bold text-black">tableOS</span>
     </div>
   );
 }
@@ -174,7 +143,7 @@ function Field({
       <div
         className={cn(
           "flex items-center border-2 rounded-xl bg-white transition-all duration-150",
-          error ? "border-red-300 focus-within:border-red-400" : "border-gray-200/50 focus-within:border-gray-200",
+          error ? "border-pink-300 focus-within:border-pink-400" : "border-gray-200/50 focus-within:border-gray-200",
           disabled && "opacity-50 pointer-events-none"
         )}
       >
@@ -195,7 +164,7 @@ function Field({
         <motion.p
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-xs text-pink-500 font-medium flex items-center gap-1"
+          className="text-xs text-pink-500 font-bold flex items-center gap-1"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11.9998 8.99999V13M11.9998 17H12.0098M10.6151 3.89171L2.39019 18.0983C1.93398 18.8863 1.70588 19.2803 1.73959 19.6037C1.769 19.8857 1.91677 20.142 2.14613 20.3088C2.40908 20.5 2.86435 20.5 3.77487 20.5H20.2246C21.1352 20.5 21.5904 20.5 21.8534 20.3088C22.0827 20.142 22.2305 19.8857 22.2599 19.6037C22.2936 19.2803 22.0655 18.8863 21.6093 18.0983L13.3844 3.89171C12.9299 3.10654 12.7026 2.71396 12.4061 2.58211C12.1474 2.4671 11.8521 2.4671 11.5935 2.58211C11.2969 2.71396 11.0696 3.10655 10.6151 3.89171Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -257,12 +226,12 @@ function AlertBanner({ message }: { message: string }) {
     <motion.div
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      className="px-4 py-3 flex text-red-700 items-center gap-2.5 bg-pink-500/10 rounded-xl"
+      className="px-4 py-3 flex text-pink-700 items-center gap-2.5 bg-pink-500/10 rounded-xl"
     >
       <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.9998 8.99999V13M11.9998 17H12.0098M10.6151 3.89171L2.39019 18.0983C1.93398 18.8863 1.70588 19.2803 1.73959 19.6037C1.769 19.8857 1.91677 20.142 2.14613 20.3088C2.40908 20.5 2.86435 20.5 3.77487 20.5H20.2246C21.1352 20.5 21.5904 20.5 21.8534 20.3088C22.0827 20.142 22.2305 19.8857 22.2599 19.6037C22.2936 19.2803 22.0655 18.8863 21.6093 18.0983L13.3844 3.89171C12.9299 3.10654 12.7026 2.71396 12.4061 2.58211C12.1474 2.4671 11.8521 2.4671 11.5935 2.58211C11.2969 2.71396 11.0696 3.10655 10.6151 3.89171Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-      <p className="text-xs text-red-700 font-bold">{message}</p>
+      <p className="text-xs text-pink-700 font-bold">{message}</p>
     </motion.div>
   );
 }
@@ -333,7 +302,7 @@ function OTPInput({ length = 6, value, onChange }: { length?: number; value: str
     e.preventDefault();
     const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, length);
     onChange(pasted.padEnd(length, "").slice(0, length));
-    toast.success("OTP pasted!");
+    toast("OTP pasted!");
     inputs.current[Math.min(pasted.length, length - 1)]?.focus();
   };
 
@@ -413,7 +382,7 @@ function OTPScreen({
 
 const categoryMeta: Record<HorecaCategory, { label: string; desc: string; icon: React.ReactNode }> = {
   cafe: { label: "Café", desc: "Coffee shops & casual dining", icon: <CoffeeIcon /> },
-  restaurant: { label: "Restaurant", desc: "Full-service dining experience", icon: <ForkKnifeIcon /> },
+  restaurant: { label: "Restaurant", desc: "Full-service dining experience", icon: <MenuIcon className="w-5 h-5" /> },
   hotel: { label: "Hotel", desc: "Hospitality & in-room dining", icon: <BedIcon /> },
 };
 
@@ -426,11 +395,17 @@ function CategoryCard({ type, selected, onClick }: { type: HorecaCategory; selec
     <button
       onClick={onClick}
       className={cn(
-        "w-full flex items-center bg-white gap-3.5 px-4 py-3.5 rounded-lg text-left cursor-pointer border border-transparent",
+        "w-full flex items-center  bg-white gap-3.5 px-4 py-3.5 rounded-lg text-left cursor-pointer border border-transparent",
         transition,
         selected && "border-gray-200 shadow-sm shadow-black/25"
       )}
     >
+      {selected && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={cn("absolute sm:bottom-4 bottom-0 left-0 text-center w-full bg-white text-black text-[9px] font-bold")}>
+          <span className="sm:hidden block">{generatePlaceholder(2, type)}</span>
+          <span className="hidden sm:block">{generatePlaceholder(5, type)}</span>
+        </motion.div>
+      )}
       <div className={cn("p-2 rounded-md shadow-none border border-transparent", transition, selected && "border-gray-200 rounded-md shadow-sm shadow-black/15")}>
         <span className={cn(transition, selected ? "text-black" : "text-gray-400")}>
           {meta.icon}
@@ -441,7 +416,7 @@ function CategoryCard({ type, selected, onClick }: { type: HorecaCategory; selec
         <p className={cn("font-bold text-sm", transition, selected ? "text-black" : "text-gray-400")}>
           {meta.label}
         </p>
-        <p className={cn("text-xs font-medium mt-0.5", transition, selected ? "text-black" : "text-gray-400")}>
+        <p className={cn("text-xs font-bold mt-0.5", transition, selected ? "text-black" : "text-gray-400")}>
           {meta.desc}
         </p>
       </div>
@@ -539,7 +514,7 @@ export default function ConnectPage() {
         return;
       }
 
-      toast.success("OTP sent to your email!");
+      toast("OTP sent to your email!");
       startResendTimer();
       setOtp("");
       setOtpError("");
@@ -566,7 +541,7 @@ export default function ConnectPage() {
       });
 
       if (response.status === 200) {
-        toast.success("Verification code sent to your email!");
+        toast("Verification code sent to your email!");
         startResendTimer();
         setOtp("");
         setOtpError("");
@@ -596,7 +571,7 @@ export default function ConnectPage() {
       });
 
       if (response.status === 200) {
-        toast.success("Welcome back!");
+        toast("Welcome back!");
         document.cookie = `user_role=${response.data.user.role}; path=/; Secure; SameSite=Lax; max-age=604800`;
         document.cookie = `store_id=${response.data.storeId}; path=/; Secure; SameSite=Lax; max-age=604800`;
         document.cookie = `better-auth.session_token=${response.data.token}; path=/; Secure; SameSite=Lax; max-age=604800`;
@@ -642,7 +617,7 @@ export default function ConnectPage() {
       });
 
       if (response.status === 200) {
-        toast.success("Store created successfully!");
+        toast("Store created successfully!");
         router.push("/");
       } else {
         setOtpError(response.message);
@@ -665,7 +640,7 @@ export default function ConnectPage() {
       });
 
       if (response.status === 200) {
-        toast.success("Verified!");
+        toast("Verified!");
         document.cookie = `user_role=${response.data.user.role}; path=/; Secure; SameSite=Lax; max-age=604800`;
         document.cookie = `store_id=${response.data.storeId}; path=/; Secure; SameSite=Lax; max-age=604800`;
         document.cookie = `better-auth.session_token=${response.data.token}; path=/; Secure; SameSite=Lax; max-age=604800`;
@@ -692,7 +667,7 @@ export default function ConnectPage() {
         body: { email },
       });
       if (response.status !== 200) { setGlobalError("Failed to resend: " + response.message); return; }
-      toast.success("Code resent!");
+      toast("Code resent!");
       startResendTimer();
     } catch (e: any) {
       setGlobalError("Failed to resend: " + e.message);
@@ -735,16 +710,14 @@ export default function ConnectPage() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 py-6 sm:py-10">
-      <Logo />
       <div className="w-full max-w-md">
         <AnimatePresence mode="wait">
-
           {view === "landing" && (
             <motion.div key="landing" variants={pageVariants} initial="hidden" animate="visible" exit="exit">
               <Card>
                 <div className="text-center mb-6 sm:mb-8">
                   <motion.h1 variants={fadeUp} custom={0} initial="hidden" animate="visible" className="text-xl sm:text-2xl font-bold text-black mb-1.5">
-                    Your workspace awaits
+                    Your workspace awaits you
                   </motion.h1>
                   <motion.p variants={fadeUp} custom={1} initial="hidden" animate="visible" className="text-sm text-gray-500">
                     New business or returning? We got you.
@@ -785,7 +758,7 @@ export default function ConnectPage() {
 
                 <div className="mb-5 sm:mb-6">
                   <h1 className="text-lg sm:text-xl font-bold text-black mb-1">What type of business?</h1>
-                  <p className="text-sm text-gray-500">Select the category that best describes your establishment.</p>
+                  <p className="text-sm text-gray-500">Select the category that best describes your businessx</p>
                 </div>
 
                 <div className="space-y-2.5 mb-5 sm:mb-6">
@@ -1008,9 +981,8 @@ export default function ConnectPage() {
                   <Divider label="or" />
 
                   <p className="text-center text-sm text-gray-500">
-                    No account?{" "}
                     <button onClick={() => { setView("create"); setCreateStep("category"); }} className="font-semibold text-black hover:underline cursor-pointer">
-                      Register your business
+                      Want to register your business?
                     </button>
                   </p>
                 </div>
@@ -1052,7 +1024,7 @@ export default function ConnectPage() {
                   />
 
                   <div className="text-right">
-                    <button className="text-sm font-medium text-gray-500 hover:text-black transition-colors cursor-pointer">
+                    <button className="text-sm font-bold text-gray-500 hover:text-black transition-colors cursor-pointer">
                       Forgot password?
                     </button>
                   </div>

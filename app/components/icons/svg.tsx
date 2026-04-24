@@ -204,4 +204,41 @@ function ServicesIcon({ size = 16, className = "", weight = "regular" }: { size?
     </svg>
   )
 }
-export { MenuIcon, ServicesIcon, StoreIcon, MinusIcon, CirclePlusIcon, PlusIcon, CheckIcon, WarningIcon, SearchIcon, GenerateIcon, ScanIcon, UserIcon, TableIcon, HomeIcon, EmployeeIcon, OrderIcon, CancelIcon, DownloadIcon, ChangeTableIcon, ErrorIcon, LocationIcon, SaveIcon, Loading, InfoIcon };
+function CoffeeIcon({ className }: { className?: string }) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M17 8H18C19.0609 8 20.0783 8.42143 20.8284 9.17157C21.5786 9.92172 22 10.9391 22 12C22 13.0609 21.5786 14.0783 20.8284 14.8284C20.0783 15.5786 19.0609 16 18 16H17M17 8H3V17C3 18.0609 3.42143 19.0783 4.17157 19.8284C4.92172 20.5786 5.93913 21 7 21H13C14.0609 21 15.0783 20.5786 15.8284 19.8284C16.5786 19.0783 17 18.0609 17 17V8ZM6 1V4M10 1V4M14 1V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function BedIcon({ className }: { className?: string }) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 4V20M2 16H22V20M2 12H10V16M22 12V20M14 12H18C19.1046 12 20 11.1046 20 10V8C20 6.89543 19.1046 6 18 6H14C12.8954 6 12 6.89543 12 8V10C12 11.1046 12.8954 12 14 12ZM6 12C7.65685 12 9 10.6569 9 9C9 7.34315 7.65685 6 6 6C4.34315 6 3 7.34315 3 9C3 10.6569 4.34315 12 6 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function DataIcon({ size = 16, className = "", weight = "regular" }: { size?: number; className?: string; weight?: string }) {
+  const strokeWidth = weight === "fill" ? 2.5 : 1.75;
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <path d="M17 9L11.5657 14.4343C11.3677 14.6323 11.2687 14.7313 11.1545 14.7684C11.0541 14.8011 10.9459 14.8011 10.8455 14.7684C10.7313 14.7313 10.6323 14.6323 10.4343 14.4343L8.56569 12.5657C8.36768 12.3677 8.26867 12.2687 8.15451 12.2316C8.05409 12.1989 7.94591 12.1989 7.84549 12.2316C7.73133 12.2687 7.63232 12.3677 7.43431 12.5657L3 17M17 9H13M17 9V13M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function DisconnectIcon({ size = 16, className = "", weight = "regular" }: { size?: number; className?: string; weight?: string }) {
+  return (
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+ <path d="M9 5.49996C12.3148 5.49996 15.0001 8.18524 15.0001 11.4999C15.0001 14.8146 12.3148 17.4999 9 17.4999C5.68519 17.4999 3 14.8146 3 11.4999C3 8.18524 5.68519 5.49996 9 5.49996ZM9 15.4999C11.0914 15.4999 12.8046 13.7867 12.8046 11.4999C12.8046 9.21314 11.0914 7.49996 9 7.49996C6.90863 7.49996 5.19538 9.21314 5.19538 11.4999C5.19538 13.7867 6.90863 15.4999 9 15.4999Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+ </svg>
+  );
+}
+function ConnectIcon({ size = 16, className = "", weight = "regular" }: { size?: number; className?: string; weight?: string }) {
+  return (
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+ <path d="M6 17C6 17.3513 6 17.5269 6.01567 17.6796C6.14575 18.9474 7.0626 19.9946 8.30206 20.2911C8.45134 20.3268 8.6255 20.35 8.97368 20.3965L15.5656 21.2754C17.442 21.5256 18.3803 21.6507 19.1084 21.3611C19.7478 21.1069 20.2803 20.6407 20.6168 20.0406C21 19.357 21 18.4105 21 16.5175V7.48244C21 5.5894 21 4.64288 20.6168 3.95935C20.2803 3.35923 19.7478 2.893 19.1084 2.6388C18.3803 2.34926 17.442 2.47435 15.5656 2.72455L8.97368 3.60347C8.62546 3.6499 8.45135 3.67311 8.30206 3.70883C7.0626 4.00532 6.14575 5.05254 6.01567 6.3203C6 6.47301 6 6.64866 6 6.99996M12 7.99996L16 12M16 12L12 16M16 12H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+ </svg>
+  );
+}
+
+export { MenuIcon, DataIcon, DisconnectIcon, CoffeeIcon, BedIcon, ServicesIcon, StoreIcon, MinusIcon, CirclePlusIcon, PlusIcon, CheckIcon, WarningIcon, SearchIcon, GenerateIcon, ScanIcon, UserIcon, TableIcon, HomeIcon, EmployeeIcon, OrderIcon, CancelIcon, DownloadIcon, ChangeTableIcon, ErrorIcon, LocationIcon, SaveIcon, Loading, InfoIcon };
